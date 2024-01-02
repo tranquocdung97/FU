@@ -1,0 +1,1 @@
+-Lưu chỉ số của phần tử lớn nhất đầu tiên trong mảng a
