@@ -1,0 +1,33 @@
+import java.util.Scanner;
+
+public class 7 {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);      
+        int n = scanner.nextInt();
+        int[] a = new int[100001];
+        int[] b = new int[100001];
+
+        for (int i = 0; i < n; i++) {
+            a[i] = scanner.nextInt();
+        }
+
+        int Max = a[0];
+        for (int i = 0; i < n; i++) {
+            if (a[i] > Max) {
+                Max = a[i];
+            }
+        }
+       for (int i = 0; i <= Max; i++) {
+            b[i] = 0;
+        }
+
+        for (int i = 0; i < n; i++) {
+            b[a[i]] += 1;
+        }
+        for (int i = 0; i <= Max; i++){
+            if (b[i] > 0) {
+                System.out.print(i + " - " + b[i] + "; ");
+            }
+        }
+    }
+}

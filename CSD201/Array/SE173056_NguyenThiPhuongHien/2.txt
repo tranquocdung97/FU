@@ -1,0 +1,19 @@
+import java.util.Scanner;
+public class 2 {
+
+    public static void main(String[] args) {
+       int n;
+       int a[] = new int[101];
+
+       Scanner sc = new Scanner(System.in);
+       n = sc.nextInt();
+       for (int i = 0; i < n; i++){
+        a[i] = sc.nextInt();
+       }
+       int Sum = 0;
+       for (int i = 0; i < n; i++){
+        Sum += a[i];
+       }
+       System.out.print(Sum);
+    }
+}
