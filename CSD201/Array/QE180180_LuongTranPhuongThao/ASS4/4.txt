@@ -1,0 +1,30 @@
+import java.util.Scanner;
+public class ASS4{
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < a.length; i++){
+            a[i] = sc.nextInt();
+        }
+        int k = sc.nextInt();
+        int x = sc.nextInt();
+        if ( k < 0 || k > n){
+            System.out.print("Invalid value");
+        } else {
+            int[] b = new int[n + 1];
+        for (int i = 0; i < k; i++) {
+            b[i] = a[i];
+        }
+        
+        b[k] = x; 
+        
+        for (int i = k + 1; i <= a.length; i++) {
+            b[i] = a[i - 1];
+        }
+        for (int i = 0; i < b.length; i++) {
+            System.out.print(" " + b[i]);
+        }
+    }
+}
+}
