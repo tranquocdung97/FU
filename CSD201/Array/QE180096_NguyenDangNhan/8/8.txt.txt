@@ -1,0 +1,24 @@
+import java.util.Scanner;
+public class A{
+    public static void main(String[] args){
+        Scanner sc= new Scanner(System.in);
+        int n=sc.nextInt();
+        int a[]= new int[100];
+        boolean array1 = true;
+        boolean array2 = true;
+        for(int i=0;i<n;i++){
+            a[i]=sc.nextInt();
+        }
+    
+        for(int i=1;i<n;i++){
+            if((a[i] <= a[i-1]))
+             array1 =false;
+            if ((a[i] >= a[i-1]))
+             array2 =false;
+         }
+         if(array1 || array2)
+            System.out.print("YES");
+         else
+            System.out.print("NO");
+    }
+}

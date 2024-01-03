@@ -1,0 +1,2 @@
+-Số lượng phần tử của mảng là hữu hạn
+-tồn tại 2 phần tử có cùng giá trong cùng một mảng
