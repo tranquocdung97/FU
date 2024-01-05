@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class 5 {
+public class 6 {
     static boolean isPrime(int n) {
         if (n < 2) return false;
         for (int i = 2; i <= Math.sqrt(n); i++) {

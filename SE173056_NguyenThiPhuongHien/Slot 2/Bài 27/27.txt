@@ -1,0 +1,74 @@
+import java.util.Scanner;
+
+class Node {
+    int data;
+    Node next;
+    Node pre;
+
+    Node(int x) {
+        data = x;
+        next = null;
+        pre = null;
+    }
+}
+
+class DouList {
+    Node head;
+    Node tail;
+
+    DouList(int x) {
+        head = new Node(x);
+        head.pre = null;
+        head.next = null;
+        tail = head;
+    }
+}
+
+public class DoublyLinkedListExample {
+
+    static DouList createList(int x) {
+        return new DouList(x);
+    }
+
+    static DouList addHead(DouList l, int x) {
+        Node temp = new Node(x);
+        temp.pre = null;
+        temp.next = l.head;
+        l.head.pre = temp;
+        l.head = temp;
+        return l;
+    }
+
+    static DouList addTail(DouList l, int x) {
+        Node temp = new Node(x);
+        temp.next = null;
+        temp.pre = l.tail;
+        l.tail.next = temp;
+        l.tail = temp;
+        return l;
+    }
+
+    static void printList(DouList l) {
+        Node p = l.head;
+        while (p != null) {
+            System.out.print(p.data + " ");
+            p = p.next;
+        }
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        int n = scanner.nextInt();
+        DouList l = createList(1);
+
+        for (int i = 2; i <= n; i++) {
+            l = addHead(l, i);
+            l = addTail(l, i);
+        }
+
+        printList(l);
+
+        scanner.close();
+    }
+}
