@@ -1,0 +1,78 @@
+import java.util.Scanner;
+
+class Node {
+    int data;
+    Node next;
+}
+
+public class Main {
+    public static Node createNode(int x) {
+        Node temp = new Node();
+        temp.next = null;
+        temp.data = x;
+        return temp;
+    }
+
+    public static void printList(Node l) {
+        Node p = l;
+        while (p != null) {
+            System.out.print(p.data + " ");
+            p = p.next;
+        }
+    }
+
+    public static Node addElement(Node p, int x) {
+        Node temp = createNode(x);
+        p.next = temp;
+        return temp;
+    }
+
+    public static Node deleteHead(Node l) {
+        Node p = l;
+        p = p.next;
+        l = null;
+        return p;
+    }
+
+    public static Node deleteTail(Node l) {
+        Node p = l;
+        while (p.next.next != null) {
+            p = p.next;
+        }
+        p.next = null;
+        return l;
+    }
+
+    public static Node deleteAt(Node l, int k) {
+        Node p = l;
+        for (int i = 0; i < k - 1; i++) {
+            p = p.next;
+        }
+        Node temp = p.next;
+        p.next = p.next.next;
+        temp = null;
+        return l;
+    }
+
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+        int n, x, k;
+        n = input.nextInt();
+        x = input.nextInt();
+        Node l = createNode(x);
+        Node p = l;
+        for (int i = 1; i < n; i++) {
+            x = input.nextInt();
+            p = addElement(p, x);
+        }
+        k = input.nextInt();
+        if (k == 0) {
+            l = deleteHead(l);
+        } else if (k == n - 1) {
+            l = deleteTail(l);
+        } else {
+            l = deleteAt(l, k);
+        }
+        printList(l);
+    }
+}

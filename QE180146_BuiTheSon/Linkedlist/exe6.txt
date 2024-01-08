@@ -1,0 +1,95 @@
+import java.util.Scanner;
+
+class Node {
+int data;
+Node next;
+
+public Node(int data) {
+this.data = data;
+this.next = null;
+}
+}
+
+class LinkedList {
+
+Node head;
+
+public void addLast(int data) {
+Node newNode = new Node(data);
+if (head == null) {
+head = newNode;
+} else {
+Node current = head;
+while (current.next != null) {
+current = current.next;
+}
+current.next = newNode;
+}
+}
+
+public void printList() {
+Node current = head;
+while (current != null) {
+System.out.print(current.data + " ");
+current = current.next;
+}
+}
+
+public int get(int k) {
+
+Node current = head;
+
+if (k == 0) {
+return head.data;
+}
+
+int count = 0;
+while (count != k - 1) {
+current = current.next;
+count++;
+}
+
+Node current_delete = current.next;
+return current_delete.data;
+}
+
+public void deleteBigThanMin(int valueMin) {
+while (head != null && head.data > valueMin) {
+head = head.next;
+}
+if (head != null) {
+Node current = head;
+while (current.next != null) {
+if (current.next.data > valueMin) {
+current.next = current.next.next;
+} else {
+current = current.next;
+}
+}
+}
+}
+}
+
+public class Main {
+public static void main(String[] args) {
+Scanner scanner = new Scanner(System.in);
+
+int n = scanner.nextInt();
+
+LinkedList list = new LinkedList();
+
+for (int i = 0; i < n; i++) {
+int num = scanner.nextInt();
+list.addLast(num);
+}
+
+int k = scanner.nextInt();
+int value_min = list.get(k);
+list.deleteBigThanMin(value_min);
+
+
+list.printList();
+
+scanner.close();
+}
+}
