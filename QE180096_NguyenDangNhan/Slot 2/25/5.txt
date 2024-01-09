@@ -1,0 +1,47 @@
+import java.util.Scanner;
+
+class Node{
+        int data;
+        Node next;
+        Node(int data){
+            this.data = data;
+            this.next = null;
+        }
+    }
+class LinkedList{
+        Node head;
+        LinkedList(){
+            this.head = null;
+        }
+    void replace(int a, int b){
+        Node current = head;
+        while (current != null){
+            if (current.data == a){
+                current.data = b;
+            }
+            current = current.next;
+        }
+    }
+    void print(Node head){
+        Node current = head;
+        while (current != null){
+            System.out.print(current.data + " ");
+            current = current.next;
+        }
+    }
+}
+public class Main{
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        LinkedList list = new LinkedList();
+        for (int i = 0; i < n; i++){
+            int data = sc.nextInt(); 
+            list.replace(i, data);
+        }
+        int a = sc.nextInt();
+        int b = sc.nextInt();
+        list.replace(a, b);
+        list.print(list.head);
+    }
+}

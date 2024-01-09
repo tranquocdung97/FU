@@ -1,0 +1,139 @@
+import java.util.Scanner;
+
+class List {
+
+    Node head;
+    Node tail;
+    static Node p;
+
+    class Node {
+
+        int value;
+        Node next;
+
+        public Node() {
+            next = null;
+        }
+
+        public Node(int value) {
+            this.value = value;
+            this.next = null;
+        }
+
+        public int getValue() {
+            return this.value;
+        }
+    }
+
+    public List() {
+        p = head = new Node();
+        tail = new Node();
+        head.next = tail;
+    }
+
+    public void add(int value) {
+        Node new_node = new Node(value);
+        p.next = new_node;
+        p = new_node;
+    }
+
+    public void addHead(int value) {
+        Node new_node = new Node(value);
+        head = new_node;
+        p = new_node;
+    }
+
+    public String toString() {
+        String str = "";
+
+        Node q = head;
+        while (q != null) {
+            str += q.getValue() + " ";
+            q = q.next;
+        }
+
+        return str;
+    }
+
+    public void insertAt(int index, int data) {
+        Node newNode = new Node(data);
+        if (index == 0) {
+            newNode.next = head;
+            head = newNode;
+        } else {
+            Node current = head;
+            for (int i = 0; i < index - 1 && current != null; i++) {
+                current = current.next;
+            }
+            if (current != null) {
+                newNode.next = current.next;
+                current.next = newNode;
+            }
+        }
+    }
+
+    public void removeHead() {
+        if (head == null) {
+            return;
+        }
+        Node temp = head.next;
+        head = temp;
+    }
+
+    public void removeTail() {
+        if (head == null) {
+            return;
+        }
+        Node temp = head;
+        while (temp.next.next != null) {
+            temp = temp.next;
+        }
+        temp.next = null;
+    }
+
+    public void removeAt(int index) {
+        Node temp = head;
+        if (index == 0) {
+            removeHead();
+        } else 
+        {
+            for (int i = 0; i <= index - 2; i++) {
+                temp = temp.next;
+            }
+            Node temp2 = temp.next;
+            temp.next = temp2.next;  
+        }
+    }
+    
+    public void getNode(int k)
+    {
+        Node temp = head;
+        for(int i=0;i<k;i++)
+        {
+            temp = temp.next;
+        }
+        System.out.print(temp.value);
+    }
+}
+
+    
+    public class nhap3 
+    {
+        public static void main(String[] args) 
+        {
+            Scanner sc = new Scanner(System.in);
+            int size = sc.nextInt();
+            List list = new List();
+
+            for (int i = 0; i < size; i++) {
+                if (i == 0) {
+                    list.addHead(sc.nextInt());
+                } else {
+                    list.add(sc.nextInt());
+                }
+            }
+
+            int k = sc.nextInt();
+            list.getNode(k);        
+        }
+    }
