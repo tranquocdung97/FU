@@ -1,0 +1,73 @@
+import java.util.Scanner;
+class Node {
+  int data;
+  Node next;
+  public Node(int data) {
+    this.data = data;
+    this.next = null;
+  }
+}
+class LinkedList {
+  Node head;
+  public LinkedList() {
+    this.head = null;
+  }
+  public void add(int data) {
+    Node newNode = new Node(data);
+    if (this.head == null) {
+      this.head = newNode;
+    } else {
+      Node current = this.head;
+      while (current.next != null) {
+        current = current.next;
+      }
+      current.next = newNode;
+    }
+  }
+  public void deleteAt(int index) {
+    if (index == 0) {
+      this.head = this.head.next;
+    } else {
+      Node current = this.head;
+      for (int i = 0; i < index - 1; i++) {
+        if (current != null) {
+          current = current.next;
+        } else {
+          System.out.println("Index out of bounds");
+          return;
+        }
+      }
+      if (current.next != null) {
+        current.next = current.next.next;
+      } else {
+        System.out.println("Index out of bounds");
+      }
+    }
+  }
+  public void print() {
+    Node current = this.head;
+    while (current != null) {
+      System.out.print(current.data + " ");
+      current = current.next;
+    }
+    System.out.println();
+  }
+}
+public class Main {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    System.out.print(" ");
+    int n = scanner.nextInt();
+    LinkedList linkedList = new LinkedList();
+    System.out.print(" ");
+    for (int i = 0; i < n; i++) {
+      int num = scanner.nextInt();
+      linkedList.add(num);
+    }
+    System.out.print(" ");
+    int k = scanner.nextInt();
+    linkedList.deleteAt(k);
+    linkedList.print();
+    scanner.close();
+  }
+}
