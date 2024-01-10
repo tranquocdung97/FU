@@ -2,69 +2,60 @@ package src;
 
 import java.util.Scanner;
 
-class ListNode {
-    int data;
-    ListNode next;
-
-    ListNode(int x) {
-        data = x;
-        next = null;
-    }
-}
-
 public class LinkedList {
-    static ListNode createNode(int x) {
-        return new ListNode(x);
+
+    public static Node createNode (int value){
+        return new Node (value);
     }
 
-    static void printList(ListNode head) {
-        ListNode current = head;
-        while (current != null) {
-            System.out.print(current.data + " ");
-            current = current.next;
-        }
-    }
-
-    static ListNode addElement(ListNode tail, int x) {
-        ListNode newNode = createNode(x);
-        tail.next = newNode;
+    public static Node addElement (Node head, int value){
+        Node newNode = createNode(value);
+        head.next = newNode;
         return newNode;
     }
 
-    static ListNode getNode(ListNode head, int k) {
-        ListNode current = head;
-        for (int i = 0; i < k; i++) {
-            if (current == null) {
-                return null; // Nếu vị trí không hợp lệ, trả về null.
-            }
-            current = current.next;
+    public static void printList (Node head){
+        Node currentNode = head;
+        while (currentNode != null){
+            System.out.print(currentNode.value + " ");
+            currentNode = currentNode.next;
         }
-        return current;
     }
 
+    public static Node convertNode (Node head, int nodeValue, int convetValue){
+        Node currentNode = head;
+        while (currentNode != null){
+            if (currentNode.value == nodeValue){
+                currentNode.value = convetValue;
+            }
+            currentNode = currentNode.next;
+        }
+        return head;
+    }
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-
+        Scanner scanner = new Scanner (System.in);
         int n = scanner.nextInt();
+        int value = scanner.nextInt();
+
+        Node head = createNode(value);
+        Node tail = head;
+
+        for (int i = 1; i < n; i++){
+            value = scanner.nextInt();
+            tail = addElement(tail,value);
+        }
+
+        printList(head);
+
+
+        // convert
+        System.out.print("\nEnter node to convert: ");
         int x = scanner.nextInt();
+        System.out.print("Enter value to convert: ");
+        int y = scanner.nextInt();
 
-        ListNode head = createNode(x);
-        ListNode tail = head;
-
-        for (int i = 1; i < n; i++) {
-            x = scanner.nextInt();
-            tail = addElement(tail, x);
-        }
-
-        int k = scanner.nextInt();
-        ListNode targetNode = getNode(head, k);
-
-        if (targetNode != null) {
-            System.out.println(targetNode.data);
-        } else {
-            System.out.println("Invalid position");
-        }
-
-        scanner.close();
+        convertNode(head, x, y);
+        System.out.print("Link list after converting: ");
+        printList(head);
     }
 }
