@@ -1,0 +1,62 @@
+
+        return temp;
+    }
+    public Node addTail(int x) {
+        Node p = head;
+        while (p.next != null) {
+            p = p.next;
+        }
+        Node temp = new Node(x);
+        temp.next = null;
+        p.next = temp;
+        return head;
+    }
+    public Node deleteBigger(int k) {
+        Node p = head;
+        Node ans = new Node(0);
+        Node ansTail = ans;
+
+        while (p != null) {
+            if (p.data <= k) {
+                ansTail = addTail(ansTail, p.data);
+            }
+            p = p.next;
+        }
+
+        return ans.next;
+    }
+    public Node getNode(int k) {
+        Node p = head;
+        for (int i = 0; i < k; i++) {
+            p = p.next;
+        }
+        return p;
+    }
+    private Node addTail(Node tail, int x) {
+        Node temp = new Node(x);
+        temp.next = null;
+        tail.next = temp;
+        return temp;
+    }
+}
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        int n = sc.nextInt();
+        int x = sc.nextInt();
+
+        LinkedList linkedList = new LinkedList();
+        linkedList.head = new Node(x);
+        Node p = linkedList.head;
+
+        for (int i = 1; i < n; i++) {
+            x = sc.nextInt();
+            p = linkedList.addElement(x);
+        }
+
+        int k = sc.nextInt();
+        linkedList.head = linkedList.deleteBigger(linkedList.getNode(k).data);
+        linkedList.printList();
+    }
+}

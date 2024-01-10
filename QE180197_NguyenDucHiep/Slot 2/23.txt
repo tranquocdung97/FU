@@ -1,0 +1,101 @@
+import java.util.Scanner;
+class Node {
+    int data;
+    Node next;
+
+    public Node(int x) {
+        data = x;
+        next = null;
+    }
+}
+class LinkedList {
+    Node head;
+
+    public LinkedList() {
+        head = null;
+    }
+    public void printList() {
+        Node p = head;
+        while (p != null) {
+            System.out.print(p.data + " ");
+            p = p.next;
+        }
+    }
+    public Node addElement(int x) {
+        Node temp = new Node(x);
+        if (head == null) {
+            head = temp;
+        } else {
+            Node p = head;
+            while (p.next != null) {
+                p = p.next;
+            }
+            p.next = temp;
+        }
+        return temp;
+    }
+    public Node deleteHead() {
+        if (head != null) {
+            Node temp = head;
+            head = head.next;
+            temp.next = null;
+            return head;
+        }
+        return null;
+    }
+    public Node deleteTail() {
+        if (head == null || head.next == null) {
+            head = null;
+        } else {
+            Node p = head;
+            while (p.next.next != null) {
+                p = p.next;
+            }
+            p.next = null;
+        }
+        return head;
+    }
+    public Node deleteAt(int k) {
+        if (k == 0) {
+            return deleteHead();
+        }
+
+        Node p = head;
+        for (int i = 0; i < k - 1 && p != null; i++) {
+            p = p.next;
+        }
+
+        if (p != null && p.next != null) {
+            Node temp = p.next;
+            p.next = temp.next;
+            temp.next = null;
+        }
+
+        return head;
+    }
+}
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        int n = sc.nextInt();
+        int x = sc.nextInt();
+
+        LinkedList linkedList = new LinkedList();
+        linkedList.head = new Node(x);
+        Node p = linkedList.head;
+
+        for (int i = 1; i < n; i++) {
+            x = sc.nextInt();
+            p = linkedList.addElement(x);
+        }
+
+        int k = sc.nextInt();
+
+        if (k >= 0 && k < n) {
+            linkedList.deleteAt(k);
+        }
+
+        linkedList.printList();
+    }
+}
