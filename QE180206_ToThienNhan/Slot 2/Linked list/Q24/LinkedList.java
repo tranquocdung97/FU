@@ -2,7 +2,7 @@ package src;
 
 import java.util.Scanner;
 
-public class LinkedList {
+public class LInkedList {
 
     public static Node createNode (int value){
         return new Node (value);
@@ -22,15 +22,18 @@ public class LinkedList {
         }
     }
 
-    public static Node convertNode (Node head, int nodeValue, int convetValue){
+    public static void getNodeValue(Node head, int k) {
         Node currentNode = head;
-        while (currentNode != null){
-            if (currentNode.value == nodeValue){
-                currentNode.value = convetValue;
+        int i = 0;
+        while (currentNode != null) {
+            if (i == k) {
+                System.out.println(currentNode.value);
+                break;
             }
+            i++;
             currentNode = currentNode.next;
         }
-        return head;
+
     }
     public static void main(String[] args) {
         Scanner scanner = new Scanner (System.in);
@@ -44,18 +47,9 @@ public class LinkedList {
             value = scanner.nextInt();
             tail = addElement(tail,value);
         }
-
         printList(head);
-
-
-        // convert
-        System.out.print("\nEnter node to convert: ");
-        int x = scanner.nextInt();
-        System.out.print("Enter value to convert: ");
-        int y = scanner.nextInt();
-
-        convertNode(head, x, y);
-        System.out.print("Link list after converting: ");
-        printList(head);
+        System.out.print("\nEnter k index to get node value: ");
+        int k = scanner.nextInt();
+        getNodeValue(head, k);
     }
 }
