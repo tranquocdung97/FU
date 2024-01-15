@@ -1,0 +1,22 @@
+import java.util.Scanner;
+import java.util.Stack;
+
+public class bai14 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        Stack<Character> stack = new Stack<>();
+
+        System.out.print("Enter a decimal number: ");
+        int n = sc.nextInt();
+
+        while (n > 0) {
+            stack.push((char) (n % 2 + '0'));
+            n /= 2;
+        }
+        System.out.print("Binary: ");
+        while (!stack.isEmpty()) {
+            System.out.print(stack.pop());
+        }
+    }
+}

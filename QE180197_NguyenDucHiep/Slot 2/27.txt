@@ -1,0 +1,74 @@
+import java.util.Scanner;
+class Node {
+    int data;
+    Node next;
+    Node pre;
+
+    public Node(int x) {
+        data = x;
+        next = null;
+        pre = null;
+    }
+}
+class DoublyLinkedList {
+    Node head;
+    Node tail;
+
+    public DoublyLinkedList() {
+        head = null;
+        tail = null;
+    }
+    public void printList() {
+        Node p = head;
+        while (p != null) {
+            System.out.print(p.data + " ");
+            p = p.next;
+        }
+    }
+    public DoublyLinkedList addHead(int x) {
+        Node temp = new Node(x);
+        temp.next = head;
+        temp.pre = null;
+
+        if (head != null) {
+            head.pre = temp;
+        } else {
+            tail = temp;
+        }
+
+        head = temp;
+        return this;
+    }
+    public DoublyLinkedList addTail(int x) {
+        Node temp = new Node(x);
+        temp.next = null;
+        temp.pre = tail;
+
+        if (tail != null) {
+            tail.next = temp;
+        } else {
+            head = temp;
+        }
+
+        tail = temp;
+        return this;
+    }
+}
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        int n = sc.nextInt();
+
+        DoublyLinkedList doublyLinkedList = new DoublyLinkedList();
+        doublyLinkedList.head = new Node(1);
+        doublyLinkedList.tail = doublyLinkedList.head;
+
+        for (int i = 2; i <= n; i++) {
+            doublyLinkedList.addHead(i);
+            doublyLinkedList.addTail(i);
+        }
+
+        doublyLinkedList.printList();
+    }
+}
