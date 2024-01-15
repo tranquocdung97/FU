@@ -1,0 +1,73 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package slot2;
+/**
+ *
+ * @author khanh
+ */
+
+import java.util.Scanner;
+
+class LinkedList {
+
+    Node head; 
+
+
+    static class Node {
+
+        int data;
+        Node next;
+
+        // Constructor
+        Node(int val) {
+            this.data = val;
+            this.next = null;
+        }
+    }
+
+    
+    public static LinkedList insert(LinkedList list, int data) {
+        Node newNode = new Node(data);
+        newNode.next = null;
+
+        if (list.head == null) {
+            list.head = newNode;
+        } else {
+            Node last = list.head;
+            while (last.next != null) {
+                last = last.next;
+            }
+            last.next = newNode;
+        }
+        return list;
+    }
+
+    
+    public static void printList(LinkedList list) {
+        Node currNode = list.head;
+        System.out.print("LinkedList: ");
+        while (currNode != null) {
+            System.out.print(currNode.data + " ");
+            currNode = currNode.next;
+        }
+    }
+}
+
+public class Ex21 {
+
+    public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
+        LinkedList linkedlist = new LinkedList();
+        int n = scan.nextInt();
+        for (int i = 0; i < n; i++) {
+            int num = scan.nextInt();
+            linkedlist = LinkedList.insert(linkedlist, num);
+        }
+        while (linkedlist.head != null) {
+            System.out.print(linkedlist.head.data + " ");
+            linkedlist.head = linkedlist.head.next;
+        }
+    }
+}
