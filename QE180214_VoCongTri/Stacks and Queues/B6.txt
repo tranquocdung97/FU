@@ -1,0 +1,51 @@
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Scanner;
+public class SuperPrimeTest {
+    public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
+        System.out.print(" ");
+        int n = scan.nextInt();
+        isSuperPrime(n);
+        scan.close();
+    }
+    static boolean isPrime(int num) {
+        if (num <= 1) {
+            return false;
+        }
+        for (int i = 2; i <= Math.sqrt(num); i++) {
+            if (num % i == 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+    static void isSuperPrime(int n) {
+        Queue<Integer> queue = new LinkedList<>();
+
+        if (n <= 10) {
+            for (int a = 2; a < n; a++) {
+                if (isPrime(a)) {
+                    queue.add(a);
+                    System.out.print(queue.peek() + " ");
+                    queue.remove();
+                }
+            }
+        } else {
+            for (int a = 2; a <= 9; a++) {
+                if (isPrime(a)) {
+                    queue.add(a);
+                }
+            }
+            while (!queue.isEmpty()) {
+                for (int a = 1; a <= 9; a++) {
+                    int temp = queue.peek() * 10 + a;
+                    if (isPrime(temp) && temp < n) {
+                        queue.add(temp);
+                    }
+                }
+                System.out.print(queue.poll() + " ");
+            }
+        }
+    }
+}
