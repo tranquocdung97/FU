@@ -1,0 +1,25 @@
+import java.util.Scanner;
+import java.util.Queue;
+import java.util.LinkedList;
+public class A{
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        Queue<Integer> qu = new LinkedList<Integer>();
+        int n=sc.nextInt();
+        int a[] = new int[n];
+        for(int i=0;i<n;i++){
+          a[i]=sc.nextInt();
+          qu.add(a[i]);
+        }
+
+        int x=sc.nextInt();
+        for(int i=0;i<x;i++){
+            int m=qu.peek();
+            qu.remove();
+            qu.add(m);
+        }
+        for(int i=0;i<n;i++) {
+            System.out.print(qu.poll()+" ");
+        }
+    }
+}
