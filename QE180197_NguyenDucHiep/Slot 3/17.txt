@@ -1,0 +1,30 @@
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Scanner;
+
+public class bai18 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        Queue<Integer> queue = new LinkedList<>();
+
+        System.out.print("Enter the number of elements in the queue: ");
+        int n = sc.nextInt();
+
+        for (int i = 0; i < n; i++) {
+            int temp = sc.nextInt();
+            queue.add(temp);
+        }
+        System.out.print("Enter the number of positions to rotate: ");
+        int k = sc.nextInt();
+
+        for (int i = 0; i < k; i++) {
+            int x = queue.poll();
+            queue.add(x);
+        }
+        System.out.print("Rotated queue: ");
+        while (!queue.isEmpty()) {
+            System.out.print(queue.poll() + " ");
+        }
+    }
+}

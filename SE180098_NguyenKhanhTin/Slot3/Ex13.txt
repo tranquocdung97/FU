@@ -1,0 +1,32 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package Slot3;
+/**
+ *
+ * @author khanh
+ */
+import java.util.Scanner;
+import java.util.Stack;
+
+public class Ex13 {
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter a string: ");
+        String inputString = sc.nextLine();
+        Stack<Character> stack = new Stack<>();
+
+        for (int i = 0; i < inputString.length(); i++) {
+            stack.push(inputString.charAt(i));
+        }
+
+        System.out.print("Reversed string: ");
+        while (!stack.isEmpty()) {
+            System.out.print(stack.pop());
+        }
+        System.out.println();
+        sc.close();
+    }
+}
