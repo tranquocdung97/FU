@@ -1,0 +1,29 @@
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Scanner;
+
+public class Queue1 {
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int i;
+        Queue<Integer> biendoiday = new LinkedList<Integer>();
+        for (i = 0; i < n; i++) {
+            biendoiday.add(sc.nextInt());
+
+        }
+        int k = sc.nextInt();
+        for (i = 0; i < k; i++) {
+            if (!biendoiday.isEmpty()) {
+                int a = biendoiday.poll();
+                biendoiday.add(a);
+            }
+        }
+        for (i = 0; i < n; i++) {
+            System.out.print(biendoiday.poll()+" ");
+        }
+
+    }
+
+}
