@@ -1,0 +1,70 @@
+package Slot2;
+
+import java.util.Scanner;
+
+class LinkedList {
+
+    public Node head;
+
+    public class Node {
+
+        public int data;
+        public Node next;
+
+        public Node(int val) {
+            this.data = val;
+            this.next = null;
+        }
+    }
+
+    public void insert(int data) {
+        Node newNode = new Node(data);
+        newNode.next = null;
+
+        if (head == null) {
+            head = newNode;
+        } else {
+            Node last = head;
+            while (last.next != null) {
+                last = last.next;
+            }
+            last.next = newNode;
+        }
+    }
+
+    public String isMonotonic() {
+        if (head == null || head.next == null) {
+            return "YES";
+        }
+
+        boolean isIncreasing = true;
+        boolean isDecreasing = true;
+
+        Node current = head;
+        while (current.next != null) {
+            if (current.data > current.next.data) {
+                isIncreasing = false;
+            }
+            if (current.data < current.next.data) {
+                isDecreasing = false;
+            }
+            current = current.next;
+        }
+
+        return (isIncreasing || isDecreasing) ? "YES" : "NO";
+    }
+}
+
+public class Ex28 {
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        LinkedList list = new LinkedList();
+        for (int i = 0; i < n; i++) {
+            int data = sc.nextInt();
+            list.insert(data);
+        }
+        System.out.println(list.isMonotonic());
+    }
+}

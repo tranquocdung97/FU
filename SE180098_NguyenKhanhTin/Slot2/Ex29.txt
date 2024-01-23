@@ -1,0 +1,60 @@
+package Slot2;
+import java.util.*;
+import java.util.Scanner;
+
+class LinkedList {
+    Node head;
+
+    class Node {
+        int data;
+        Node next;
+
+        Node(int val) {
+            this.data = val;
+            this.next = null;
+        }
+    }
+
+    public void insert(int data) {
+        Node newNode = new Node(data);
+        newNode.next = null;
+
+        if (head == null) {
+            head = newNode;
+        } else {
+            Node last = head;
+            while (last.next != null) {
+                last = last.next;
+            }
+            last.next = newNode;
+        }
+    }
+
+    public void printList() {
+        Node current = head;
+        while (current != null) {
+            System.out.print(current.data + " ");
+            current = current.next;
+        }
+    }
+}
+
+public class Ex29 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        LinkedList listA = new LinkedList();
+        for (int i = 0; i < n; i++) {
+            int data = sc.nextInt();
+            listA.insert(data);
+        }
+        int m = sc.nextInt();
+        LinkedList listB = new LinkedList();
+        for (int i = 0; i < m; i++) {
+            int data = sc.nextInt();
+            listB.insert(data);
+        }
+        listA.printList();
+        listB.printList();
+    }
+}
