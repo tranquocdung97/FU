@@ -1,0 +1,58 @@
+import java.util.Scanner;
+
+public class test37 {
+  static int n, k;
+  static int[] a, b;
+
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    n = sc.nextInt();
+
+    a = new int[n];
+    b = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = sc.nextInt();
+      if (i == 0)
+        b[i] = a[i];
+      else
+        b[i] = b[i - 1] + a[i];
+    }
+
+    k = sc.nextInt();
+
+    for (int i = 0; i < n; i++) {
+      if (b[i] == k) {
+        printArr(a, 0, i);
+        return;
+      } else if (b[i] > k) {
+        int left = binarySearch(b, n, b[i] - k);
+        if (left != -1) {
+          printArr(a, left + 1, i);
+          return;
+        }
+      }
+    }
+
+    System.out.println(-1);
+
+  }
+
+  public static int binarySearch(int[] a, int n, int k) {
+    int left = 0, right = n - 1;
+
+    while (left < right) {
+      int mid = (left + right) / 2;
+      if (b[mid] < k)
+        left = mid + 1;
+      else
+        right = mid;
+    }
+
+    return a[left] == k ? left : -1;
+  }
+
+  public static void printArr(int[] a, int left, int right) {
+    for (int i = left; i <= right; i++)
+      System.out.printf(a[i] + " ");
+  }
+}
