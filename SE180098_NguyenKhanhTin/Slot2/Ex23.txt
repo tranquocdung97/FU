@@ -1,0 +1,93 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+
+package slot2;
+/**
+ *
+ * @author khanh
+ */
+
+import java.util.Scanner;
+
+class LinkedList {
+    public Node head;
+
+    public static class Node {
+        int data;
+        Node next;
+
+        Node(int data) {
+            this.data = data;
+            this.next = null;
+        }
+    }
+
+    public void append(int data) {
+        Node newNode = new Node(data);
+        if (head == null) {
+            head = newNode;
+        } else {
+            Node last = head;
+            while (last.next != null) {
+                last = last.next;
+            }
+            last.next = newNode;
+        }
+    }
+
+    public void deleteAt(int k) {
+        if (head == null) {
+            return;
+        }
+        if (k == 0) {
+            head = head.next;
+            return;
+        }
+        Node current = head;
+        Node prev = null;
+        int count = 0;
+        while (current != null && count < k) {
+            prev = current;
+            current = current.next;
+            count++;
+        }
+        if (current == null) {
+            return;
+        }
+        prev.next = current.next;
+    }
+
+    public void printList() {
+        Node temp = head;
+        while (temp != null) {
+            System.out.print(temp.data + " ");
+            temp = temp.next;
+        }
+        System.out.println();
+    }
+}
+public class Ex23{
+    public static void main(String[] args) {
+        LinkedList list = new LinkedList();
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter the number of elements n: ");
+        int n = scanner.nextInt();
+        System.out.println("Enter " + n + " integers:");
+        for (int i = 0; i < n; i++) {
+            list.append(scanner.nextInt());
+        }
+        System.out.print("Enter the position k to delete: ");
+        int k = scanner.nextInt();
+        if (k >= n) {
+            System.out.println("Position exceeds the length of the linked list.");
+        } else {
+            list.deleteAt(k);
+        }
+        System.out.println("List after deletion:");
+        list.printList();
+        scanner.close();
+    }
+}
+

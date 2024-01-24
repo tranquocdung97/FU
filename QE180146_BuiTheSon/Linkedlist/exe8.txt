@@ -1,0 +1,87 @@
+import java.util.Scanner;
+
+class Node {
+    int data;
+    Node next;
+    Node pre;
+}
+
+class DoublyLinkedList {
+    Node head;
+    Node tail;
+}
+
+public class Main {
+    public static DoublyLinkedList createList(int x) {
+        DoublyLinkedList l = new DoublyLinkedList();
+        l.head = new Node();
+        l.head.data = x;
+        l.head.pre = null;
+        l.head.next = null;
+        l.tail = l.head;
+        return l;
+    }
+
+    public static DoublyLinkedList addHead(DoublyLinkedList l, int x) {
+        Node temp = new Node();
+        temp.data = x;
+        temp.pre = null;
+        temp.next = l.head;
+        l.head.pre = temp;
+        l.head = temp;
+        return l;
+    }
+
+    public static DoublyLinkedList addTail(DoublyLinkedList l, int x) {
+        Node temp = new Node();
+        temp.data = x;
+        temp.next = null;
+        temp.pre = l.tail;
+        l.tail.next = temp;
+        l.tail = temp;
+        return l;
+    }
+
+    public static DoublyLinkedList addAt(DoublyLinkedList l, int k, int x) {
+        Node p = l.head;
+        for (int i = 0; i < k - 1; i++) {
+            p = p.next;
+        }
+        Node temp = new Node();
+        temp.data = x;
+        temp.pre = p;
+        temp.next = p.next;
+        p.next.pre = temp;
+        p.next = temp;
+        return l;
+    }
+
+    public static void printList(DoublyLinkedList l) {
+        Node p = l.head;
+        while (p != null) {
+            System.out.print(p.data + " ");
+            p = p.next;
+        }
+    }
+
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+        int n = input.nextInt();
+        int x = input.nextInt();
+        DoublyLinkedList l = createList(x);
+        for (int i = 1; i < n; i++) {
+            x = input.nextInt();
+            l = addTail(l, x);
+        }
+        int k = input.nextInt();
+        x = input.nextInt();
+        if (k == 0) {
+            l = addHead(l, x);
+        } else if (k == n) {
+            l = addTail(l, x);
+        } else {
+            l = addAt(l, k, x);
+        }
+        printList(l);
+    }
+}

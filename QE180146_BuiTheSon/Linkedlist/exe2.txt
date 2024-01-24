@@ -1,0 +1,68 @@
+import java.util.LinkedList;
+import java.util.Scanner;
+
+
+public class main {
+static class Node {
+int data;
+Node next;
+
+public Node(int data) {
+this.data = data;
+this.next = null;
+}
+
+@Override
+public String toString() {
+return "Node{" +
+"data=" + data +
+", node=" + next +
+'}';
+}
+}
+
+public static void main(String[] args) {
+Scanner sc = new Scanner(System.in);
+LinkedList<Integer> ls = new LinkedList<>();
+Integer n, k, x;
+n = sc.nextInt();
+for (int i = 0; i < n; i++) {
+ls.add(Integer.valueOf(sc.nextInt()));
+}
+k = sc.nextInt();
+x = sc.nextInt();
+
+if (k >= n) {
+n++;
+}
+Node head = null;
+Node tail = null;
+
+for (int i = 0; i < n; i++) {
+
+Node node;
+if (i == k) {
+if (i < ls.size()){
+n++;
+}
+ls.add(k, x);
+node = new Node(ls.get(k));
+} else {
+
+node = new Node(ls.get(i));
+}
+
+if (head == null) {
+head = node;
+} else {
+tail.next = node;
+}
+tail = node;
+
+}
+while (head != null) {
+System.out.print(head.data + " ");
+head = head.next;
+}
+}
+}

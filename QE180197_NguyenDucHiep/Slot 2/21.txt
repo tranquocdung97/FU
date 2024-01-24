@@ -1,0 +1,54 @@
+import java.util.Scanner;
+class node {
+    int data;
+    node next;
+
+    public node(int x) {
+        data = x;
+        next = null;
+    }
+}
+class LinkedList {
+    node head;
+
+    public LinkedList() {
+        head = null;
+    }
+    public void addElement(int x) {
+        node temp = new node(x);
+        if (head == null) {
+            head = temp;
+        } else {
+            node p = head;
+            while (p.next != null) {
+                p = p.next;
+            }
+            p.next = temp;
+        }
+    }
+    public void printList() {
+        node p = head;
+        while (p != null) {
+            System.out.print(p.data + " ");
+            p = p.next;
+        }
+    }
+}
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        int n = sc.nextInt();
+        int x = sc.nextInt();
+        
+        LinkedList linkedList = new LinkedList();
+        linkedList.head = new node(x);
+        node p = linkedList.head;
+
+        for (int i = 1; i < n; i++) {
+            x = sc.nextInt();
+            linkedList.addElement(x);
+        }
+        linkedList.printList();
+    }
+}

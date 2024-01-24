@@ -1,0 +1,15 @@
+import java.util.Scanner;
+import java.util.Stack;
+public class A{
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        Stack<String> chuoi = new Stack<String>();
+        String s= sc.nextLine();
+        for(int i=0;i<s.length();i++){
+            chuoi.push(s.charAt(i)+"");
+        }
+        for(int i=0;i<s.length();i++){
+            System.out.print(chuoi.pop());
+        }
+    }
+}

@@ -1,0 +1,88 @@
+import java.util.Scanner;
+
+class Node {
+    int data;
+    Node next;
+
+    Node(int x) {
+        data = x;
+        next = null;
+    }
+}
+
+public class LinkedList {
+    public static Node createNode(int x) {
+        return new Node(x);
+    }
+
+    public static void printList(Node l) {
+        Node p = l;
+        while (p != null) {
+            System.out.print(p.data + " ");
+            p = p.next;
+        }
+    }
+
+    public static Node addElement(Node p, int x) {
+        Node temp = createNode(x);
+        p.next = temp;
+        return temp;
+    }
+
+    public static Node addHead(Node l, int x) {
+        Node temp = createNode(x);
+        temp.next = l;
+        l = temp;
+        return l;
+    }
+
+    public static Node addAt(Node l, int k, int x) {
+        Node p = l;
+        for (int i = 0; i < k - 1; i++) {
+            p = p.next;
+        }
+        Node temp = createNode(x);
+        temp.next = p.next;
+        p.next = temp;
+
+        return l;
+    }
+
+    public static Node addTail(Node l, int x) {
+        Node p = l;
+        while (p.next != null) {
+            p = p.next;
+        }
+        Node temp = createNode(x);
+        temp.next = null;
+        p.next = temp;
+        return l;
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int x = scanner.nextInt();
+
+        Node l = createNode(x);
+        Node p = l;
+
+        for (int i = 1; i < n; i++) {
+            x = scanner.nextInt();
+            p = addElement(p, x);
+        }
+
+        int k = scanner.nextInt();
+        x = scanner.nextInt();
+
+        if (k == 0) {
+            l = addHead(l, x);
+        } else if (k == n) {
+            l = addTail(l, x);
+        } else {
+            l = addAt(l, k, x);
+        }
+
+        printList(l);
+    }
+}

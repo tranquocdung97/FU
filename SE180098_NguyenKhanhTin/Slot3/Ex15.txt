@@ -1,0 +1,39 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package Slot3;
+/**
+ *
+ * @author khanh
+ */
+import java.util.Scanner;
+
+public class Ex15 {
+    public static String encodeString(String s, int shift) {
+        StringBuilder encoded = new StringBuilder();
+        for (char c : s.toCharArray()) {
+            if (c >= 'a' && c <= 'z') {
+                int shiftedIndex = ((c - 'a') + shift) % 26;
+                char shiftedChar = (char) ('a' + shiftedIndex);
+                encoded.append(shiftedChar);
+            } else {
+                
+                encoded.append(c);
+            }
+        }
+        return encoded.toString();
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter a lowercase string to encode: ");
+        String inputString = sc.nextLine();
+        System.out.print("Enter the shift value for encoding: ");
+        int shiftValue = sc.nextInt();
+        String encodedString = encodeString(inputString, shiftValue);
+        System.out.println("Encoded string: " + encodedString);
+        sc.close();
+    }
+}
+
