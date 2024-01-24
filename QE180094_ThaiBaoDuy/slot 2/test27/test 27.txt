@@ -1,0 +1,21 @@
+import java.util.LinkedList;
+import java.util.Scanner;
+
+public class LinkedListExample {
+    public static void main (String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        
+        LinkedList<Integer> list = new LinkedList<>();
+        list.add(1);
+        
+        for(int i = 2; i <= n; i++) {
+            list.addFirst(i);
+            list.addLast(i);
+        }
+        
+        for(Integer i : list) {
+            System.out.print(i + " ");
+        }
+    }
+}
