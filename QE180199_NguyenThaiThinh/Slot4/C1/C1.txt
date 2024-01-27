@@ -1,0 +1,23 @@
+import java.util.LinkedList;
+import java.util.Scanner;
+
+public class Searchalgorithm {
+
+    public static void main(String[] args) {
+        Scanner sc=new Scanner(System.in);
+      LinkedList<Integer>tim=new LinkedList<Integer>();
+      int n=sc.nextInt();
+      for(int i=0;i<n;i++){
+       tim.add(sc.nextInt());
+    }
+    int x=sc.nextInt();
+    int result=-1;
+    for (int i=0;i<n;i++){
+        if(tim.get(i)==x){
+            result=i;
+            break;
+        } 
+    }
+        System.out.println(result);
+}
+}

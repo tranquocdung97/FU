@@ -1,0 +1,19 @@
+import java.util.Scanner;
+import java.util.Stack;
+
+public class Stack1 {
+
+    public static void main(String[] args) {
+    String S;
+    int i;
+    Scanner sc =new Scanner(System.in);
+    S=sc.nextLine();
+    Stack<Character> daonguoc =new Stack<>();
+    for(i=0;i<S.length();i++){
+    daonguoc.push(S.charAt(i));
+    }
+    for (i=0;i<S.length();i++){
+        System.out.print(daonguoc.pop());
+    }
+    }
+}

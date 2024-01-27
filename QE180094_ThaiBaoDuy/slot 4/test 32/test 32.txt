@@ -1,0 +1,26 @@
+import java.util.Scanner;
+
+public class Test32 {
+
+public static void main(String[] args) {
+Scanner sc = new Scanner(System.in);
+int n = sc.nextInt();
+int []arr = new int[n];
+for (int i = 0; i < n; i++) {
+arr[i]= sc.nextInt();
+}
+int x = sc.nextInt();
+int findedIndex = SearchAlgorithm.LinearSearch(arr, n, x);
+System.out.println(findedIndex);
+}
+}
+class SearchAlgorithm {
+
+public static int LinearSearch(int[] arr, int size, int value) {
+for (int i = 0; i < size; i++) {
+if (arr[i] == value) return i;
+}
+return -1;
+}
+
+}

@@ -1,0 +1,27 @@
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Scanner;
+import java.util.Stack;
+
+public class Stack2 {
+    public static void main(String[] args) {
+     Scanner sc=new Scanner(System.in);
+      int m = 0;
+      int n;
+      n=sc.nextInt();
+     Stack<String>nhiphan=new Stack<>();
+     while (n>0){
+         m = n % 2;
+         nhiphan.push(Integer.toString(m));
+         n=n/2;
+     }
+       ArrayList<String> list = new ArrayList<String>();  
+     
+     while(!nhiphan.empty()){
+      
+       list.add(nhiphan.pop()); 
+   }
+
+System.out.print(String.join("", list));
+    }
+}

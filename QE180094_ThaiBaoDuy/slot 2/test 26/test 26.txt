@@ -1,0 +1,27 @@
+import java.util.*;
+
+public class Test26 {
+    public static Scanner sc = new Scanner(System.in);
+    
+    public static void main(String[] args) {
+        int n = sc.nextInt();
+        LinkedList<Integer> list = new LinkedList<>();
+        for (int i = 0; i < n; ++i) {
+            int x = sc.nextInt();
+            list.add(x);
+        }
+        int k = sc.nextInt();
+        int x = list.get(k);
+        
+        for (int i = 0; i < list.size(); ++i) {
+            if (list.get(i) > x) {
+                list.remove(i);
+                --i;
+            }
+        }
+        
+        for (int i = 0; i < list.size(); ++i) {
+            System.out.print(list.get(i) + " ");
+        }
+    }
+}
