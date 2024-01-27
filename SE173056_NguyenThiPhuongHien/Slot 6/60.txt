@@ -1,0 +1,35 @@
+import java.util.Scanner;
+
+public class Combinations {
+    static int[] x = new int[11];
+
+    public static void printArray(int[] a, int n) {
+        for (int i = 1; i <= n; i++) {
+            System.out.print(a[i]);
+        }
+        System.out.print(" ");
+    }
+
+    public static void combinations(int h, int k, int n) {
+        for (int i = x[h - 1] + 1; i <= n - (k - h); i++) {
+            x[h] = i;
+            if (h == k) {
+                printArray(x, k);
+            } else {
+                combinations(h + 1, k, n);
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        int n = scanner.nextInt();
+        int k = scanner.nextInt();
+        x[0] = 0;
+
+       combinations(1, k, n);
+
+        scanner.close();
+    }
+}

@@ -1,0 +1,41 @@
+import java.util.Scanner;
+
+public class Permutation {
+    static boolean[] b = new boolean[11];
+    static int[] x = new int[11];
+
+    public static void printArray(int[] a, int n) {
+        for (int i = 1; i <= n; i++) {
+            System.out.print(a[i]);
+        }
+        System.out.print(" ");
+    }
+
+    public static void permutation(int k, int n) {
+        for (int i = 1; i <= n; i++) {
+            if (b[i]) {
+                x[k] = i;
+                if (k == n) {
+                    printArray(x, n);
+                } else {
+                    b[i] = false;
+                    permutation(k + 1, n);
+                    b[i] = true;
+                }
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        int n = scanner.nextInt();
+        for (int i = 1; i <= n; i++) {
+            b[i] = true;
+        }
+
+        permutation(1, n);
+
+        scanner.close();
+    }
+}

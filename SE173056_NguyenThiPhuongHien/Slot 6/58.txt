@@ -1,0 +1,21 @@
+import java.util.Scanner;
+
+public class RecursiveBinaryString {
+    public static void generateBinaryStrings(int n, String s) {
+        if (n == 0) {
+            System.out.print(s + " ");
+        } else {
+            for (int i = 0; i <= 1; i++) {
+                generateBinaryStrings(n - 1, s + Integer.toString(i));
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        int n = scanner.nextInt();
+        generateBinaryStrings(n, "");
+
+        scanner.close();
+    }
