@@ -1,0 +1,36 @@
+import java.util.Scanner;
+
+public class Hoandoi {
+
+    public static void main(String[] args) {
+        Scanner sc=new Scanner(System.in);
+     int n=sc.nextInt();
+     int a[]=new int[n];
+     for (int i=0;i<n;i++){
+         a[i]=sc.nextInt();
+     }
+    int min=0;
+    int max=0;
+    for(int i=1; i<a.length; i++) {
+    if(a[i] < a[min]) {
+    min = i;
+    }
+    }
+
+    for(int i=1; i<a.length; i++) {
+    if(a[i] >= a[max]) {
+    max = i;
+    }
+    }
+    
+    int flag=a[min];
+    a[min]=a[max];
+    a[max]= flag;
+   
+    
+   
+    for(int i=0;i<n;i++){
+        System.out.print(a[i]+" ");
+    }
+    }
+    }

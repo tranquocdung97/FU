@@ -1,0 +1,89 @@
+package Slot2;
+
+import java.util.Scanner;
+
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+/**
+ *
+ * @author khanh
+ */
+
+
+class LinkedList {
+
+    Node head;
+
+    public class Node {
+
+        int data;
+        Node next;
+
+        Node(int val) {
+            this.data = val;
+            this.next = null;
+        }
+    }
+
+    public void insert(int data) {
+        Node newNode = new Node(data);
+        newNode.next = null;
+
+        if (head == null) {
+            head = newNode;
+        } else {
+            Node last = head;
+            while (last.next != null) {
+                last = last.next;
+            }
+            last.next = newNode;
+        }
+    }
+
+    public void removeAt(int index) {
+        if (index == 0) {
+            head = head.next;
+            return;
+        }
+
+        Node current = head;
+        int count = 0;
+
+        while (current != null) {
+            if (count == index - 1) {
+                current.next = current.next.next;
+                return;
+            }
+            count++;
+            current = current.next;
+        }
+    }
+
+    public void printList() {
+        Node current = head;
+
+        while (current != null) {
+            System.out.print(current.data + " ");
+            current = current.next;
+        }
+    }
+}
+
+public class Ex25 {
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        LinkedList list = new LinkedList();
+        for (int i = 0; i < n; i++) {
+            int data = sc.nextInt();
+            list.insert(data);
+        }
+        int k = sc.nextInt();
+        list.removeAt(k);
+        list.printList();
+    }
+}
+

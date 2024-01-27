@@ -26,14 +26,14 @@ public class Ex15 {
     }
 
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+        Scanner sc = new Scanner(System.in);
         System.out.print("Enter a lowercase string to encode: ");
-        String inputString = scanner.nextLine();
+        String inputString = sc.nextLine();
         System.out.print("Enter the shift value for encoding: ");
-        int shiftValue = scanner.nextInt();
+        int shiftValue = sc.nextInt();
         String encodedString = encodeString(inputString, shiftValue);
         System.out.println("Encoded string: " + encodedString);
-        scanner.close();
+        sc.close();
     }
 }
 

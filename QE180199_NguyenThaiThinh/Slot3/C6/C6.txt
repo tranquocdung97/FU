@@ -1,0 +1,66 @@
+import java.util.Scanner;
+import java.util.Stack;
+
+public class Queue2 {
+    
+    public static boolean Prime(int n)
+    {
+        if(n < 2)
+        {
+            return false;
+        }
+        
+        for(int i = 2 ; i<=Math.sqrt(n);i++)
+        {
+            if(n % i ==0)
+            {
+                return false;
+            }
+        }
+        
+        return true;
+    }
+    
+     
+      private static Stack<Integer> timSieuNguyenTo(int n) {
+        Stack<Integer> sieuNguyenToStack = new Stack<>();
+        
+        for (int i = 2; i <= n; i++) {
+            if (Prime(i)) {
+                sieuNguyenToStack.push(i);
+            }
+        }
+
+        Stack<Integer> resultStack = new Stack<>();
+        while (!sieuNguyenToStack.isEmpty()) {
+            int currentNumber = sieuNguyenToStack.pop();
+            int tempNumber = currentNumber;
+
+           
+            boolean isSieuNguyenTo = true;
+            while (tempNumber > 0) {
+                tempNumber /= 10;
+                if (tempNumber > 0 && !Prime(tempNumber)) {
+                    isSieuNguyenTo = false;
+                    break;
+                }
+            }
+
+            if (isSieuNguyenTo) {
+                resultStack.push(currentNumber);
+            }
+        }
+
+        return resultStack;
+    }
+    
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+        int n = input.nextInt();  
+        Stack<Integer> sieuNguyenToStack = timSieuNguyenTo(n);
+        while (!sieuNguyenToStack.isEmpty()) {
+            System.out.print(sieuNguyenToStack.pop() + " ");
+        }
+    }
+    
+}
