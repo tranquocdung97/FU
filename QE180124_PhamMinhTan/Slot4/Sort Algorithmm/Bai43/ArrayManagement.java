@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 class ArrayManagement {
-    private int size;
-    private Scanner sc;
-    private ArrayList<Integer> arrayList;
+    private final int size;
+    private final Scanner sc;
+    private final ArrayList<Integer> arrayList;
     public ArrayManagement(int size, Scanner sc) {
         this.arrayList = new ArrayList<>();
         this.sc = sc;
