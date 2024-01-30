@@ -1,0 +1,73 @@
+import java.util.Scanner;
+
+public class Main {
+    static class Node {
+        int data;
+        Node next;
+
+        public Node(int data) {
+            this.data = data;
+            this.next = null;
+        }
+    }
+
+    static class LinkedList {
+        Node head;
+
+        public LinkedList() {
+            this.head = null;
+        }
+
+        public void addElement(int data) {
+            Node newNode = new Node(data);
+
+            if (head == null) {
+                head = newNode;
+            } else {
+                Node current = head;
+                while (current.next != null) {
+                    current = current.next;
+                }
+                current.next = newNode;
+            }
+        }
+
+        public void replaceElement(int oldValue, int newValue) {
+            Node current = head;
+
+            while (current != null) {
+                if (current.data == oldValue) {
+                    current.data = newValue;
+                }
+
+                current = current.next;
+            }
+        }
+
+        public void printList() {
+            Node current = head;
+            while (current != null) {
+                System.out.print(current.data + " ");
+                current = current.next;
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        int n = scanner.nextInt();
+
+        LinkedList linkedList = new LinkedList();
+        for (int i = 0; i < n; i++) {
+            int value = scanner.nextInt();
+            linkedList.addElement(value);
+        }
+        int a = scanner.nextInt();
+        int b = scanner.nextInt();
+        linkedList.replaceElement(a, b);
+        linkedList.printList();
+    }
+}
+String listLinker(int[] arg1, int arg2, int arg3) {
+}

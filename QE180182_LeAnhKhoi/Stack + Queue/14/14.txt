@@ -1,0 +1,17 @@
+import java.util.Stack;
+import java.util.Scanner;
+
+public class Main{
+public static void main(String[] args){
+        Scanner scanner = new Scanner(System.in);
+        StackInteger stack = new StackInteger();
+        int n = scanner.nextInt();
+        while(n0){
+        stack.push(n%2);
+        n = n 2;
+        }
+    while(!stack.empty()){
+        System.out.print(stack.pop());
+        }
+    }
+}
