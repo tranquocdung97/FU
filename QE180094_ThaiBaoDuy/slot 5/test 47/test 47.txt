@@ -1,0 +1,28 @@
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+
+public class Test47 {
+    public static void main (String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        ArrayList<Integer> a = new ArrayList<>();
+        for(int i = 0; i < n; i++) {
+            a.add(sc.nextInt());
+        }
+        
+        Collections.sort(a);
+        int value = a.get(n-1) + 1;
+        for(int i = 1; i < n; i++) {
+            if(!(a.get(i) == a.get(i-1) || a.get(i) == a.get(i-1) + 1)) {
+                value = a.get(i-1) + 1;
+                break;
+            }
+        }
+        
+        if(a.get(0) > 0) {
+            value = a.get(0) - 1;
+            }
+            System.out.print(value);
+    }
+} 

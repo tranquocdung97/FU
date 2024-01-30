@@ -1,0 +1,16 @@
+import java.util.Scanner;
+
+public class Test53{
+    public static long recursion(long a, long b){
+        if(b == 0) return 1;
+        return a * recursion(a, b-1);
+    }
+
+    public static void main(String [] arg){
+        Scanner sc = new Scanner(System.in);
+        long a = sc.nextInt();
+        long b = sc.nextInt();
+        long n = recursion(a,b);
+        System.out.println(n);
+    }
+}
