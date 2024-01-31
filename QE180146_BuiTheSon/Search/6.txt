@@ -1,0 +1,59 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Nhap so nguyen duong n
+        int n = scanner.nextInt();
+
+        // Khoi tao mang a voi do dai n
+        int[] a = new int[n];
+
+        // Nhap cac phan tu cua mang a
+        for (int i = 0; i < n; i++) {
+            a[i] = scanner.nextInt();
+        }
+
+        // Nhap so s
+        int s = scanner.nextInt();
+
+        // Goi phuong thuc findSubarray de tim day con lien tiep dau tien co tong bang s
+        int[] result = findSubarray(a, s);
+
+        // In ket qua
+        if (result == null) {
+            System.out.println("-1");
+        } else {
+            for (int num : result) {
+                System.out.print(num + " ");
+            }
+        }
+    }
+
+    // Phuong thuc tim day con lien tiep dau tien co tong bang s
+    public static int[] findSubarray(int[] a, int s) {
+        int start = 0;
+        int end = 0;
+        int sum = 0;
+
+        while (end < a.length) {
+            sum += a[end];
+
+            while (sum > s) {
+                sum -= a[start];
+                start++;
+            }
+
+            if (sum == s) {
+                int[] result = new int[end - start + 1];
+                System.arraycopy(a, start, result, 0, end - start + 1);
+                return result;
+            }
+
+            end++;
+        }
+
+        return null;
+    }
+}

@@ -1,0 +1,10 @@
+1. Câu hỏi ôn tập.
+
+Câu hỏi ôn tập.
+Tìm ví trị đầu tiên của x trong dãy a được sắp xếp giảm dần.
+Với đề bài như vậy ta nên chọn thuật toán tìm kiếm nào tối ưu nhất.
+
+Gợi ý:
+Với những dãy được sắp xếp, thì thuật toán tìm kiếm tối ưu chỉ có ĐPT là O(logN).
+
+đáp án: binary search

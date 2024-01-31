@@ -1,0 +1,50 @@
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Scanner;
+
+
+public class Main {
+
+    private static List<String> permutation(int[] arr) {
+        List<String> result = new ArrayList<>();        
+        generatePermutations(arr, 0, result);
+        return result;
+    }
+    
+    private static void generatePermutations(int[] arr, int start, List<String> result) {
+        if (start == arr.length - 1) {
+            StringBuilder permutation = new StringBuilder();
+            for (int i : arr) {
+                permutation.append(i);
+            }
+            result.add(permutation.toString());
+        } else 
+        for (int i = start; i < arr.length; i++) {
+            swap(arr, start, i);
+            generatePermutations(arr, start + 1, result);
+            swap(arr, start, i);
+        }
+    }
+    
+    private static void swap(int[] nums, int i, int j) {
+        int temp = nums[i];
+            nums[i] = nums[j];
+            nums[j] = temp;
+    }
+    
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int arr[] = new int[n];
+        for (int i = 0; i < n; i++)
+            arr[i] = i + 1;
+        List<String> permutations = permutation(arr);
+        Collections.sort(permutations);
+        for (String permutation : permutations) {
+            System.out.print(permutation + " ");
+        }
+    }
+    
+}
