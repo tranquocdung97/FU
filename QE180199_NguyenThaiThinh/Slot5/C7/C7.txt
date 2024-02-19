@@ -1,0 +1,32 @@
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+
+public class Slot5 {
+
+public static void main(String[] args) 
+    {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        ArrayList<Integer> arr = new ArrayList<>();
+        for (int i = 0; i < n; i++) 
+        {
+            arr.add(sc.nextInt());
+        }
+        Collections.sort(arr);
+        int value = arr.get(n - 1) + 1;
+        for (int i = 1; i < n; i++) 
+        {
+            if (!(arr.get(i) == arr.get(i - 1) || arr.get(i) == arr.get(i - 1) + 1))
+            {
+                value = arr.get(i - 1) + 1;
+                break;
+            }
+        }
+        if (arr.get(0) > 0)
+        {
+            value = arr.get(0) - 1;
+        }
+        System.out.print(value);
+    }
+}

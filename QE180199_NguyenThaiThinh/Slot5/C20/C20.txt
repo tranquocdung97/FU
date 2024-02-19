@@ -1,0 +1,54 @@
+import java.util.Scanner;
+import java.util.Set;
+import java.util.TreeSet;
+public class bai60 {
+        static Set<String> listString = new TreeSet<String>();
+
+        static int[] a = new int[10];
+
+        static boolean[] Bool = new boolean[10];
+
+        public static void main(String[] args) {
+
+            Scanner sc = new Scanner(System.in);
+            int n = sc.nextInt();
+            int k = sc.nextInt();
+
+
+            for (int i = 1; i <= 9; i++) {
+                Bool[i] = false;
+            }
+            a[0] = 0;
+            createCharNumber(1, k, n);
+
+
+            for (String s : listString) {
+                System.out.print(s + " ");
+            }
+        }
+
+        public static void addNumber(int[] a, int k) {
+            String s = "";
+            for (int i = 1; i <= k; i++) {
+                s += a[i];
+            }
+            listString.add(s);
+        }
+
+
+        public static void createCharNumber(int j, int k, int n) {
+            for (int i = 1; i <= n; i++) {
+
+                if (Bool[i] == false && i > a[j - 1]) {
+                    a[j] = i;
+                    Bool[i] = true;
+                    if (j == k) {
+                        addNumber(a, k);
+                    } else {
+                        createCharNumber(j + 1, k, n);
+                    }
+                    Bool[i] = false;
+                }
+            }
+        }
+    }

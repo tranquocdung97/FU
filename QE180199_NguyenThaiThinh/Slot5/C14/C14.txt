@@ -1,0 +1,19 @@
+import java.util.Scanner;
+
+public class Slot5{
+   public static int ucln(int a , int b){
+    while (b!=0){
+        int r = a % b;
+        a = b;
+        b = r;
+    }
+    return a;
+   } 
+   public static void main(String args[]){
+    Scanner sc=new Scanner (System.in);
+    int a=sc.nextInt();
+    int b=sc.nextInt();
+    int result= ucln(a,b);
+    System.out.print(result);
+   }
+}
