@@ -1,0 +1,22 @@
+import java.util.Scanner;
+public class GuessNumberGame {
+    static int gameGuessNumber(long n) {
+        if (n == 1) {
+            return 1;
+        }
+        return 1 + gameGuessNumber(n - (n + 1) / 2);
+    }
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print(" ");
+        long n = scanner.nextLong();
+        while (n < 1 || n > Math.pow(10, 15)) {
+            System.out.print(" ");
+            n = scanner.nextLong();
+        }
+        int result = gameGuessNumber(n);
+        System.out.println(" " + result);
+
+        scanner.close();
+    }
+}

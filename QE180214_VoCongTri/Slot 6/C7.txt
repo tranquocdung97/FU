@@ -1,0 +1,22 @@
+import java.util.Scanner;
+public class BinaryStrings {
+    static void printBinaryStrings(int n, String currentString) {
+        if (n == 0) {
+            System.out.print(currentString + " ");
+            return;
+        }
+        printBinaryStrings(n - 1, currentString + '0');
+        printBinaryStrings(n - 1, currentString + '1');
+    }
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print(" ");
+        int n = scanner.nextInt();
+        while (n <= 0) {
+            System.out.print(" ");
+            n = scanner.nextInt();
+        }
+        printBinaryStrings(n, "");
+        scanner.close();
+    }
+}

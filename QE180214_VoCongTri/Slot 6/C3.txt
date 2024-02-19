@@ -1,0 +1,24 @@
+import java.util.Scanner;
+public class UCLNRecursive {
+    static int ucln(int a, int b) {
+        if (b == 0) {
+            return a;
+        } else {
+            return ucln(b, a % b);
+        }
+    }
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print(" ");
+        int a = scanner.nextInt();
+
+        System.out.print(" ");
+        int b = scanner.nextInt();
+
+        int result = ucln(a, b);
+        System.out.println(" " + result);
+
+        scanner.close();
+    }
+}

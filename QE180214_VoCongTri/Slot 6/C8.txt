@@ -1,0 +1,25 @@
+import java.util.Scanner;
+public class Permutations {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print(" ");
+        int n = scanner.nextInt();
+        if (n < 1 || n > 9) {
+            System.out.println(" ");
+        } else {
+            System.out.println(" ");
+            generatePermutations("", n);
+        }
+    }
+    public static void generatePermutations(String current, int n) {
+        if (current.length() == n) {
+            System.out.print(current + " ");
+            return;
+        }
+        for (int i = 1; i <= n; i++) {
+            if (!current.contains(String.valueOf(i))) {
+                generatePermutations(current + i, n);
+            }
+        }
+    }
+}
