@@ -1,0 +1,40 @@
+package Slot6;
+import java.util.Scanner;
+
+public class Ex59 {
+    public static void hvc(int arr[], int n) {
+        if (n == 1) {
+            for (int i = 0; i < arr.length; i++) {
+                System.out.print(arr[i]);
+            }
+            System.out.print(" ");
+        } else {
+            for (int i = 0; i < n - 1; i++) {
+                hvc(arr, n - 1);
+                if (n % 2 == 0) {
+                    swap(arr, i, n - 1);
+                } else {
+                    swap(arr, 0, n - 1);
+                }
+            }
+            hvc(arr, n - 1);
+        }
+    }
+
+    public static void swap(int[] array, int i, int j) {
+        int temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        sc.close();
+        int[] array = new int[n];
+        for (int i = 0; i < n; i++) {
+            array[i] = i + 1;
+        }
+        hvc(array, n);
+    }
+}

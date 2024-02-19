@@ -1,0 +1,20 @@
+package Slot6;
+import java.util.Scanner;
+
+public class Ex58 {
+    public static void grow(int n, String p) {
+        if (n == 0) {
+            System.out.print(p + " ");
+        } else {
+            grow(n - 1, p + "0");
+            grow(n - 1, p + "1");
+        }
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        sc.close();
+        grow(n, "");
+    }
+}
