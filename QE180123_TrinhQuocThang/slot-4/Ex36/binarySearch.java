@@ -1,5 +1,4 @@
 import java.util.Scanner;
-
 public class binarySearch {
 	public static int binary(int[] arr, int x) {
 		int start = 0, end = arr.length - 1;
@@ -15,7 +14,6 @@ public class binarySearch {
 		else
 			return -1;
 	}
-
 	public static void main(String[] args) {
 		Scanner scanner = new Scanner(System.in);
 		int n = scanner.nextInt();
