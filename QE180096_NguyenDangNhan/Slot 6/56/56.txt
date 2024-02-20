@@ -1,0 +1,17 @@
+import java.util.Scanner;
+
+public class Test {
+    public static long gameGuessNumber(long n) {
+        if(n==1) return 1;
+
+        return 1 + gameGuessNumber(n-(n+1)/2);
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        
+        long n = sc.nextLong();
+        long a = gameGuessNumber(n);
+        System.out.println(a);
+    }
+}
