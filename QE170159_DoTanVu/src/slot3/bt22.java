@@ -1,0 +1,55 @@
+
+package slot3;
+import java.util.Scanner;
+
+class Node{
+        int data;
+        Node next;
+        Node(int data){
+            this.data = data;
+            this.next = null;
+        }
+    }
+class LinkedList{
+        Node head;
+        LinkedList(){
+            this.head = null;
+        }
+    void insertAt(int data, int k){
+        Node newNode = new Node(data);
+        if (k == 0){
+            newNode.next = head;
+            head = newNode;
+        }else{
+            Node prev = head;
+            for (int i = 0; i < k - 1; i++){
+                prev = prev.next;
+            }
+            newNode.next = prev.next;
+            prev.next = newNode;
+        }
+    }
+    void print(Node head){
+        Node current = head;
+        while (current != null){
+            System.out.print(current.data + " ");
+            current = current.next;
+        }
+    }
+}    
+
+public class bt22{
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        LinkedList list = new LinkedList(); 
+        for (int i = 0; i < n; i++){
+            int data = sc.nextInt();
+            list.insertAt(data, i);
+        }
+        int k = sc.nextInt();
+        int x = sc.nextInt();
+        list.insertAt(x, k);
+        list.print(list.head);
+    }
+}
