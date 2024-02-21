@@ -1,0 +1,64 @@
+package src;
+
+import java.util.Scanner;
+
+class Node {
+    int data;
+    Node next;
+
+    Node(int x) {
+        data = x;
+        next = null;
+    }
+}
+
+public class CircularLinkedList{
+
+    static Node createNode(int x) {
+        Node temp = new Node(x);
+        temp.next = temp;
+        return temp;
+    }
+
+    static void printList(Node l, int k) {
+        Node p = l;
+        for (int i = 0; i < k; i++) {
+            p = p.next;
+        }
+        System.out.print(p.data + " ");
+        Node p2 = p.next;
+        while (p2 != p) {
+            System.out.print(p2.data + " ");
+            p2 = p2.next;
+        }
+    }
+
+    static Node addTail(Node l, int x) {
+        Node p = l;
+        while (p.next != l) {
+            p = p.next;
+        }
+        Node temp = new Node(x);
+        temp.data = x;
+        temp.next = l;
+        p.next = temp;
+        return l;
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int x = scanner.nextInt();
+        Node l = createNode(x);
+
+        for (int i = 1; i < n; i++) {
+            x = scanner.nextInt();
+            l = addTail(l, x);
+        }
+
+        int k = scanner.nextInt();
+        printList(l, k);
+
+        scanner.close();
+    }
+}
