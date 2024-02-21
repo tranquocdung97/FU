@@ -1,0 +1,16 @@
+import java.util.Scanner;
+
+public class bai54 {
+    public static int ucln(int a, int b) {
+        if (b == 0) return a;
+        if (a % b == 0) return b;
+        return ucln(b, a % b);
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int a = sc.nextInt();
+        int b = sc.nextInt();
+        System.out.println(ucln(a, b));
+    }
+}
