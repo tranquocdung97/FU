@@ -1,0 +1,59 @@
+import java.util.Scanner;
+
+class node {
+    int data;
+    node pLeft;
+    node pRight;
+
+    node (int data) {
+        this.data = data;
+        this.pLeft = null;
+        this.pRight = null;
+    }
+}
+
+class TREE {
+    node root;
+
+    TREE() {
+        this.root = null;
+    }
+}
+
+public class Main {
+    public static node insert(node root, int data) {
+        if (root != null) {
+            if (root.data > data)
+                root.pLeft = insert(root.pLeft, data);
+            else
+                root.pRight = insert(root.pRight, data);
+            return root;
+        }
+        return new node(data);
+    }
+
+    public static node input(node root) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        while ((n--) != 0) {
+            int data = sc.nextInt();
+            root = insert(root, data);
+        }
+        sc.close();
+        return root;
+    }
+
+    public static void display(node root) {
+        if (root != null) {
+            display(root.pLeft);
+            System.out.print(root.data + " ");
+            display(root.pRight);
+        }
+    }
+
+    public static void main(String[] args) {
+        TREE tree = new TREE();
+        tree.root = input(tree.root);
+        display(tree.root);
+    }
+}

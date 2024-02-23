@@ -1,0 +1,125 @@
+import java.util.Scanner;
+
+class BinaryT{
+	private TreeNode root;
+	
+	private class TreeNode{
+		private int data;
+		private TreeNode left;
+		private TreeNode right;
+		public TreeNode(int data) {
+			this.data = data;
+			left = null;
+			right = null;
+		}
+	}
+	private TreeNode addRecursive(TreeNode current, int value) {
+		if(current == null) {
+			return new TreeNode(value);
+		}
+		if(value < current.data) {
+			current.left = addRecursive(current.left, value);
+		}else if(value >= current.data) {
+			current.right = addRecursive(current.right, value);
+		}else {
+			return current;
+		}
+		return current;
+	}
+	public void add(int value) {
+		root = addRecursive(root, value);
+	}
+	private boolean isNode(TreeNode node) {
+		return (node.left == null && node.right == null);
+	}
+	private int countTreeNode(TreeNode node) {
+		if(node == null) return 0;
+		if(isNode(node)) return 1;
+		return countTreeNode(node.left) + countTreeNode(node.right);
+	}
+	public int countNode() {
+		return countTreeNode(root);
+	}
+	private int treeLevel(TreeNode node) {
+		if(node == null) return -1;
+		if(isNode(node)) return 0;
+		return 1+ Math.max(treeLevel(node.left),treeLevel(node.right));
+	}
+	public void Lever() {
+		System.out.print(treeLevel(root));
+	}
+	private boolean checkAvl(TreeNode node) {
+		if(node == null) return true;
+		if(Math.abs(treeLevel(node.left) - treeLevel(node.right)) > 1) return false;
+		return checkAvl(node.left) && checkAvl(node.right);
+	}
+	public boolean checkAVL() {
+		return checkAvl(root);
+	}
+	private TreeNode turnRight(TreeNode A) {
+		TreeNode B = A.left;
+		TreeNode D = B.right;
+		A.left = D;
+		B.right = A;
+		return B;
+	}
+	private TreeNode turnLeft(TreeNode A) {
+		TreeNode B = A.right;
+		TreeNode C = B.left;
+		A.right = C;
+		B.left = A;
+		return B;
+	}
+	public TreeNode UpdateTreeAvl(TreeNode node) {
+		if(Math.abs(treeLevel(node.left) - treeLevel(node.right)) > 1) {
+			if(treeLevel(node.left) > treeLevel(node.right)) {
+				TreeNode current = node.left;
+				if(treeLevel(current.left) >= treeLevel(current.right)) {
+					node = turnRight(node);
+				}else {
+					node.left = turnLeft(node.left);
+					node = turnRight(node);
+				}
+			}else {
+				TreeNode current = node.right;
+				if(treeLevel(current.right) >= treeLevel(current.left)) {
+					node = turnLeft(node);
+				}else {
+					node.right = turnRight(node.right);
+					node = turnLeft(node);
+				}
+			}
+		}
+		if(node.left != null) node.left = UpdateTreeAvl(node.left);
+		if(node.right != null) node.right = UpdateTreeAvl(node.right);
+		return node;
+	}
+	public void UpdateAvl() {
+		while(!checkAvl(root)) {
+	    	root = UpdateTreeAvl(root);
+		}
+	}
+	private void InOder(TreeNode node) {
+		if(node!= null) {
+			InOder(node.left);
+			System.out.print(node.data + " ");
+			InOder(node.right);
+		}
+	}
+	public void print() {
+		InOder(root);
+	}
+}
+
+public class BinaryTree2{
+	public static void main(String[]args) {
+		Scanner sc = new Scanner(System.in);
+		int n = sc.nextInt();
+		BinaryT tree = new BinaryT();
+		for(int i = 0; i < n; i++) {
+			tree.add(sc.nextInt());
+		}
+		tree.UpdateAvl();
+		tree.Lever();
+	}
+}
