@@ -1,0 +1,48 @@
+import java.util.Scanner;
+
+class Node {
+    int data;
+    Node left;
+    Node right;
+    
+    Node(int data) {
+        this.data = data;
+        left = null;
+        right = null;
+    }
+}
+
+public class Main {
+    static Node insert(Node t, int x) {
+        if (t == null) {
+            return new Node(x);
+        } else {
+            if (x < t.data) {
+                t.left = insert(t.left, x);
+            } else {
+                t.right = insert(t.right, x);
+            }
+            return t;
+        }
+    }
+    
+    static boolean isLeafNode(Node l) {
+        return (l.left == null && l.right == null);
+    }
+    
+    static int treeLevel(Node t) {
+        if (t == null) return -1;
+        return 1 + Math.max(treeLevel(t.left), treeLevel(t.right));
+    }
+    
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        Node t = null;
+        for (int i = 0; i < n; i++) {
+            int temp = scanner.nextInt();
+            t = insert(t, temp);
+        }
+        System.out.println(treeLevel(t));
+    }
+}
