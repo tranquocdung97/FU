@@ -1,0 +1,21 @@
+import java.util.*;
+
+public class CODELEARN_CTDLGT {
+public static Scanner sc = new Scanner(System.in);
+
+public static void main(String[] args) {
+int n = sc.nextInt();
+Queue<Integer> q = new LinkedList<>();
+for (int i = 0; i < n; i++) {
+q.add(sc.nextInt());
+}
+int k = sc.nextInt();
+for (int i = 0; i < k; i++) {
+int x = q.poll();
+q.add(x);
+}
+while (!q.isEmpty()) {
+System.out.print(q.poll() + " ");
+}
+}
+}

@@ -1,0 +1,17 @@
+import java.util.Scanner;
+
+public class Test52 {
+    public static long giaiThua(long n) {
+        if(n==1) return 1;
+        
+        return n* giaiThua(n-1);
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        
+        long n = sc.nextLong();
+        n = giaiThua(n);
+        System.out.println(n);
+    }
+}

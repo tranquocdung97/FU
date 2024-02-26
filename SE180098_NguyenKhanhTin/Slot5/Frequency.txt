@@ -1,0 +1,43 @@
+package Slot5;
+
+/**
+ *
+ * @author khanh
+ */
+import java.util.Scanner;
+
+public class Frequency {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int[] array = new int[n];
+        for (int i = 0; i < n; i++) {
+            array[i] = scanner.nextInt();
+        }
+        scanner.close();
+
+        for (int i = 0; i < n - 1; i++) {
+            for (int j = 0; j < n - i - 1; j++) {
+                if (array[j] > array[j + 1]) {
+                    int temp = array[j];
+                    array[j] = array[j + 1];
+                    array[j + 1] = temp;
+                }
+            }
+        }
+
+        int current = array[0];
+        int count = 1;
+        for (int i = 1; i < n; i++) {
+            if (array[i] == current) {
+                count++;
+            } else {
+                System.out.print(current + " " + count + "; ");
+                current = array[i];
+                count = 1;
+            }
+        }
+        System.out.print(current + " " + count + "; ");
+    }
+}

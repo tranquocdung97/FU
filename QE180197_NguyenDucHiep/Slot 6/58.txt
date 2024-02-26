@@ -1,0 +1,19 @@
+import java.util.Scanner;
+
+public class bai58 {
+    public static void dequy(int n, String s) {
+        if (n == 0) {
+            System.out.print(s + " ");
+        } else {
+            for (int i = 0; i <= 1; i++) {
+                dequy(n - 1, s + i);
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        dequy(n, "");
+    }
+}

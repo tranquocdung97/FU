@@ -1,0 +1,41 @@
+package Slot5;
+
+import java.util.Scanner;
+
+public class Shell_sort {
+
+    static void shellsort(int[] array) {
+        int i, j, temp, gap;
+        int n = array.length;
+
+        for (gap = n / 2; gap > 0; gap /= 2) {
+            for (i = gap; i < n; i++) {
+                temp = array[i];
+                for (j = i; j >= gap && array[j - gap] > temp; j -= gap) {
+                    array[j] = array[j - gap];
+                }
+                array[j] = temp;
+            }
+        }
+    }
+
+    static void printArray(int arr[], int n) {
+        n = arr.length;
+        for (int i = 0; i < n; i++) {
+            System.out.print(arr[i] + " ");
+        }
+        System.out.println();
+    }
+
+    public static void main(String args[]) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int arr[] = new int[n];
+        for (int i = 0; i < n; i++) {
+            arr[i] = sc.nextInt();
+        }
+        shellsort(arr);
+        printArray(arr, n);
+
+    }
+}

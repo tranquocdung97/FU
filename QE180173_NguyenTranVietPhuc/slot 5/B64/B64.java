@@ -1,0 +1,70 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ */
+
+package com.mycompany.b64;
+
+/**
+ *
+ * @author PHUC
+ */
+import java.util.Scanner;
+
+public class B64 {
+
+  static class BinaryTree {
+    private class Node {
+      int val;
+      Node next, prev;
+
+      private Node(int val) {
+        this.val = val;
+        this.next = null;
+        this.prev = null;
+      }
+    }
+
+
+    Node root;
+
+    public BinaryTree() {
+      this.root = null;
+    }
+
+    public void add(int val) {
+      this.root = addRecursive(root, val);
+    }
+
+    private Node addRecursive(Node current, int val) {
+      if (current == null)
+        return new Node(val);
+      if (val < current.val)
+        current.prev = addRecursive(current.prev, val);
+      else
+        current.next = addRecursive(current.next, val);
+
+      return current;
+    }
+
+    public int treeLevel(Node current) {
+      int count = 0;
+      if (current == null)
+        return count;
+      else
+        count++;
+      return count = count + Math.max(treeLevel(current.prev), treeLevel(current.next));
+    }
+  }
+
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    BinaryTree tree = new BinaryTree();
+    for (int i = 0; i < n; i++) {
+      tree.add(sc.nextInt());
+    }
+
+    System.out.print(tree.treeLevel(tree.root) - 1);
+  }
+
+}

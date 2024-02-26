@@ -1,0 +1,29 @@
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.*;
+public class Entry {
+public static void main(String[] args) {
+// Input
+Scanner sc = new Scanner(System.in);
+int n = sc.nextInt();
+int[] a = new int[n];
+for (int i = 0; i < n; i++) {
+a[i] = sc.nextInt();
+}
+int k = sc.nextInt();
+
+// Solve
+int result = 1;
+Arrays.sort(a);
+int[] arrayDistance = new int[n-1];
+for (int i = 0; i < n-1; i++) {
+arrayDistance[i] = a[i+1] - a[i];
+}
+Arrays.sort(arrayDistance);
+for (int i =0 ; i < n-1; i++) {
+if (arrayDistance[i] > k) result++;
+}
+// Output
+System.out.print(result);
+}
+}

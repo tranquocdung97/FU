@@ -14,7 +14,6 @@ public class sumArray {
 				if (sum == x) {
 					for (int k = start; k <= end; k++)
 						System.out.print(arr[k] + " ");
-					return;
 				}
 			}
 		}

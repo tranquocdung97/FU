@@ -1,0 +1,5 @@
+Câu hỏi ôn tập.
+Binany Search (Tìm kiếm nhị phân) là một giải thuật tìm kiếm nhanh với độ phức tạp thời gian chạy là Ο(log n). Giải thuật tìm kiếm nhị phân làm việc dựa trên nguyên tắc chia để trị (Divide and Conquer). Để giải thuật này có thể làm việc một cách chính xác thì tập dữ liệu nên ở trong dạng đã được sắp xếp.
+Thuật toán tìm kiếm nhị phân (Binany Search) áp dụng (phải cho kết quả đúng) được trên những dãy nào sau đây:
+A.arr = [1, 2, 4, 5, 6, 7]
+C.arr = [6, 6, 5, 3, 2]

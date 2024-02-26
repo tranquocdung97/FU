@@ -1,0 +1,25 @@
+import java.util.*;
+
+public class ctdtVaGt {
+    public static void main(String[] args) {
+        Scanner cin = new Scanner(System.in);
+        Integer n = cin.nextInt(), tmp;
+        List<Integer>a = new ArrayList<>();
+        for(int i=0; i<n; i++) {tmp=cin.nextInt(); a.add(tmp);}
+        List<Integer>plus = new ArrayList<>();
+        List<Integer>noPlus = new ArrayList<>();
+        for(int i=0; i<a.size(); i++) {
+            if(a.get(i)>0) {plus.add(a.get(i));}
+            if(a.get(i)<0) {noPlus.add(a.get(i));}
+        }
+        Collections.sort(plus);
+        Collections.sort(noPlus, Collections.reverseOrder());
+        int f=0, l=0;
+        for(int i=0; i<a.size(); i++) {
+            if(a.get(i)==0) {System.out.print(a.get(i) + " ");}
+            if(a.get(i)>0) {System.out.print(plus.get(f) + " "); f++;}
+            if(a.get(i)<0) {System.out.print(noPlus.get(l) + " "); l++;}
+        }
+        cin.close();
+    }
+}

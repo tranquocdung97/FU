@@ -1,0 +1,13 @@
+import java.util.Scanner;
+public class Main{
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        long result = fibonacii(n);
+        System.out.print(result);
+    }
+    public static long fibonacii(int n) {
+    if(n == 1 || n == 2){return 1;}
+    return fibonacii(n-2) + fibonacii(n-1);
+    }
+}
