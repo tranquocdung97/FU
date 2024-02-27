@@ -1,0 +1,178 @@
+import java.util.Scanner;
+
+public class AVLT {
+
+	public static class Node {
+
+		public int value;
+		public Node left, right;
+
+		public Node() {
+
+		}
+
+		public Node(int value) {
+			this.value = value;
+			this.left = null;
+			this.right = null;
+		}
+
+		public Node(int value, Node left, Node right) {
+			this.value = value;
+			this.left = left;
+			this.right = right;
+		}
+
+	}
+
+	public static class AVLTree {
+		public Node root;
+		final int min = Integer.MIN_VALUE;
+
+		public AVLTree() {
+			this.root = null;
+		}
+
+		public AVLTree(Node roof) {
+			this.root = roof;
+		}
+
+		private Node add(int value, Node node) {
+			if (node == null) {
+				node = new Node(value);
+			} else {
+				if (node.value > value)
+					node.left = add(value, node.left);
+				else
+					node.right = add(value, node.right);
+			}
+			return node;
+		}
+
+		public void add(int value) {
+			this.root = add(value, root);
+		}
+
+		private void inOrder(Node root) {
+			if (root == null)
+				return;
+			inOrder(root.left);
+			System.out.print(root.value + " ");
+			inOrder(root.right);
+
+		}
+
+		public void inOrder() {
+			if (root == null)
+				System.out.println("NULL");
+			else
+				inOrder(root);
+		}
+
+		private int height(Node root) {
+			if (root == null)
+				return -1;
+			int left = height(root.left);
+			int right = height(root.right);
+			return Math.max(left, right) + 1;
+		}
+
+		public int height() {
+			return height(root);
+		}
+
+		private boolean isBalanced(Node root) {
+			if (root == null) {
+				return true;
+			}
+
+			if (Math.abs(height(root.left) - height(root.right)) > 1) {
+				return false;
+			}
+
+			return isBalanced(root.left) && isBalanced(root.right);
+		}
+
+		public boolean isBalanced() {
+			return isBalanced(root);
+		}
+
+		private Node rotationLeft(Node root) {
+			Node right = root.right;
+			Node temp = right.left;
+			root.right = temp;
+			right.left = root;
+			return right;
+		}
+
+		private Node rotationRight(Node root) {
+			Node left = root.left;
+			Node temp = left.right;
+			root.left = temp;
+			left.right = root;
+			return left;
+		}
+
+		private Node updateTreeAVL(Node root) {
+			if (Math.abs(height(root.left) - height(root.right)) > 1) {
+				if (height(root.left) > height(root.right)) {
+					Node node = root.left;
+					if (height(node.left) >= height(node.right))
+						root = rotationRight(root);
+					else {
+						root.left = rotationLeft(root.left);
+						root = rotationRight(root);
+					}
+				} else {
+					Node node = root.right;
+					if (height(node.right) >= height(node.left))
+						root = rotationLeft(root);
+					else {
+						root.right = rotationRight(root.right);
+						root = rotationLeft(root);
+					}
+				}
+			}
+
+			if (root.left != null)
+				root.left = updateTreeAVL(root.left);
+			if (root.right != null)
+				root.right = updateTreeAVL(root.right);
+
+			return root;
+		}
+
+		public void updateTreeAVL() {
+			while (!isBalanced(root))
+				root = updateTreeAVL(root);
+		}
+
+		private Node deleteNode(Node root, int val) {
+			if (root == null)
+				return null;
+			if (root.value > val)
+				root.left = deleteNode(root.left, val);
+			else if (root.value < val)
+				root.right = deleteNode(root.right, val);
+			else if (root.value == val)
+				root = null;
+			return root;
+		}
+
+		public void deleteNode(int val) {
+			root = deleteNode(root, val);
+		}
+	}
+
+	public static void main(String[] args) {
+		Scanner scanner = new Scanner(System.in);
+		int n = scanner.nextInt();
+		AVLTree tree = new AVLTree();
+		for (int i = 0; i < n; i++)
+			tree.add(scanner.nextInt());
+		tree.updateTreeAVL();
+		System.out.println(tree.height());
+		tree.inOrder();
+		scanner.close();
+	}
+}
