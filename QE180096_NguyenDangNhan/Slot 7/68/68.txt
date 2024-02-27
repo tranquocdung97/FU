@@ -1,0 +1,91 @@
+import java.util.Scanner;
+
+class BinaryT{
+    private TreeNode root;
+    
+    private class TreeNode{
+        private int data;
+        private TreeNode left;
+        private TreeNode right;
+        public TreeNode(int data) {
+            this.data = data;
+            left = null;
+            right = null;
+        }
+    }
+    private TreeNode addRecursive(TreeNode current, int value) {
+        if(current == null) {
+            return new TreeNode(value);
+        }
+        if(value < current.data) {
+            current.left = addRecursive(current.left, value);
+        }else if(value >= current.data) {
+            current.right = addRecursive(current.right, value);
+        }else {
+            return current;
+        }
+        return current;
+    }
+    public void add(int value) {
+        root = addRecursive(root, value);
+    }
+    
+public TreeNode deleteNode(TreeNode p, int data){
+
+if (p.right != null && p.right.data == data) {
+     p.right = null;
+    return p;
+  }else if (p.left != null && p.left.data == data) {
+     p.left = null;
+    return p;
+}else {
+   if (data > p.data) {
+    if (p.right == null) {
+      return p;
+    } else {
+     deleteNode(p.right, data);
+      }
+   }else {
+    if (p.left == null) {
+    return p;
+ } else {
+     deleteNode(p.left, data);
+     }
+   }
+  }
+     return p;
+ }
+public void delete(int x){
+if(root.data==x){
+   root= null;
+   System.out.print("NULL");
+ }else{
+   deleteNode(root,x);
+   }
+}
+
+    private void InOder(TreeNode node) {
+        if(node!= null) {
+            InOder(node.left);
+            System.out.print(node.data + " ");
+            InOder(node.right);
+        }
+    }
+    public void print() {
+        InOder(root);
+    }
+}
+
+public class BinaryTree2{
+    public static void main(String[]args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        BinaryT tree = new BinaryT();
+        for(int i = 0; i < n; i++) {
+            tree.add(sc.nextInt());
+        }
+int x= sc.nextInt();
+tree.delete(x);
+tree.print();
+    }
+}

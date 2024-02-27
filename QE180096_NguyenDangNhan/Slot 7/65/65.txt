@@ -1,0 +1,64 @@
+import java.util.Scanner;
+
+public class Main {
+
+  static class BinaryTree {
+    private class Node {
+      int val;
+      Node next, prev;
+
+      private Node(int val) {
+        this.val = val;
+        this.next = null;
+        this.prev = null;
+      }
+    }
+
+
+    Node root;
+
+    public BinaryTree() {
+      this.root = null;
+    }
+
+    public void add(int val) {
+      this.root = addRecursive(root, val);
+    }
+
+    private Node addRecursive(Node current, int val) {
+      if (current == null)
+        return new Node(val);
+      if (val < current.val)
+        current.prev = addRecursive(current.prev, val);
+      else
+        current.next = addRecursive(current.next, val);
+
+      return current;
+    }
+
+    public int treeLevel(Node current) {
+      if (current == null)
+        return -1;
+      else
+        return 1 + Math.max(treeLevel(current.prev), treeLevel(current.next));
+    }
+
+    public boolean checkAvl(Node current) {
+      if (current == null)
+        return true;
+      return Math.abs(treeLevel(current.prev) - treeLevel(current.next)) < 2;
+    }
+  }
+
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    BinaryTree tree = new BinaryTree();
+    for (int i = 0; i < n; i++) {
+      tree.add(sc.nextInt());
+    }
+
+    System.out.print(tree.checkAvl(tree.root));
+  }
+
+}
