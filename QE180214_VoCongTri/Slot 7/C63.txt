@@ -1,0 +1,65 @@
+import java.util.Scanner;
+
+class Node {
+    int data;
+    Node left;
+    Node right;
+
+    public Node(int data) {
+        this.data = data;
+        this.left = null;
+        this.right = null;
+    }
+}
+
+class Tree {
+    Node root;
+
+    public Node insert(Node root, int data) {
+        if (root == null) {
+            return new Node(data);
+        }
+
+        if (data < root.data) {
+            root.left = insert(root.left, data);
+        } else {
+            root.right = insert(root.right, data);
+        }
+
+        return root;
+    }
+
+    boolean isLeafNode(Node node) {
+        return (node.left == null && node.right == null);
+    }
+
+    int treeLevel(Node root) {
+        if (root == null) {
+            return -1;
+        }
+
+        int leftHeight = treeLevel(root.left);
+        int rightHeight = treeLevel(root.right);
+
+        return 1 + Math.max(leftHeight, rightHeight);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print(" ");
+        int n = scanner.nextInt();
+
+        Tree tree = new Tree();
+        for (int i = 0; i < n; i++) {
+            int temp = scanner.nextInt();
+            tree.root = tree.insert(tree.root, temp);
+        }
+
+        System.out.println(" " + tree.treeLevel(tree.root));
+
+        scanner.close();
+    }
+}
