@@ -1,0 +1,40 @@
+import java.util.*;
+
+
+public class ctdtVaGt {                                                  
+    public static void main(String[] args) {
+        Scanner cin = new Scanner(System.in);
+        Integer n = cin.nextInt(), tmp;
+        List<Integer> a = new ArrayList<>();
+        for(int i=0; i<n; i++) {tmp=cin.nextInt(); a.add(tmp);} 
+        cin.close();
+        if(n<2) {System.out.println(a.get(0)); System.exit(0);} 
+
+        List<ArrayList<Integer>> b = new ArrayList<>(); 
+        List<Integer> flag = new ArrayList<>(); 
+        b.add(new ArrayList<>()); 
+        Integer k = 0; 
+        b.get(k).add(a.get(0));  
+        for(int i=1; i<n; i++) {
+            if(a.get(i-1)<=a.get(i)) { 
+                if(i==n-1) {flag.add(b.get(k).size()+1);} 
+                b.get(k).add(a.get(i)); 
+            } else { 
+                k++; 
+                b.add(new ArrayList<>()); 
+                flag.add(b.get(k-1).size()); 
+                b.get(k).add(a.get(i)); 
+            }
+        }
+
+
+        List<Integer>flag2 = new ArrayList<>(flag); 
+        Collections.sort(flag2);
+
+        List<Integer>result = new ArrayList<>(b.get(flag.indexOf(flag2.get(flag2.size()-1))));
+        
+        for(int i=0; i<result.size(); i++) {
+            System.out.print(result.get(i) + " ");
+        }
+    }
+}
