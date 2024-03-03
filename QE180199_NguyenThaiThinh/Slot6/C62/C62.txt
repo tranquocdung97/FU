@@ -1,0 +1,64 @@
+import java.util.Scanner;
+
+public class Slot6 {
+  public static void main(String[] args) {
+
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    BinaryTree tree = new BinaryTree();
+
+    for (int i = 0; i < n; i++) {
+      tree.add(sc.nextInt());
+    }
+
+    tree.displayNodeList(tree.root);
+  }
+
+  static class BinaryTree {
+
+    Node root;
+
+
+    class Node {
+      private int val;
+      Node left, right;
+
+      Node(int val) {
+        this.val = val;
+        this.left = null;
+        this.right = null;
+      }
+
+    }
+
+
+    BinaryTree() {
+      this.root = null;
+    }
+
+    void add(int val) {
+      root = addNodeRecusive(root, val);
+    }
+
+    private Node addNodeRecusive(Node current, int val) {
+      if (current == null) {
+        return new Node(val);
+      }
+      if (val <= current.val) {
+        current.right = addNodeRecusive(current.right, val);
+      } else {
+        current.left = addNodeRecusive(current.left, val);
+      }
+      return current;
+    }
+
+    void displayNodeList(Node current) {
+      if (current != null) {
+        displayNodeList(current.right);
+        System.out.print(current.val + " ");
+        displayNodeList(current.left);
+      }
+    }
+
+  }
+}
