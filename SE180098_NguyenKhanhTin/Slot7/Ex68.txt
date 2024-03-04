@@ -1,0 +1,104 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package Slot7;
+
+import java.util.Scanner;
+
+/**
+ *
+ * @author khanh
+ */
+class Ex68 {
+
+    static class Node {
+
+        int data;
+        Node left;
+        Node right;
+
+        public Node(int val) {
+            this.data = val;
+            this.left = null;
+            this.right = null;
+        }
+    }
+
+    static class Tree {
+
+        private Node root;
+
+        void display(Node node) {
+            if (node == null) {
+                return;
+            }
+            display(node.left);
+            System.out.print(node.data + " ");
+            display(node.right);
+        }
+
+        void insert(int val) {
+            root = insertVal(root, val);
+        }
+
+        Node insertVal(Node node, int val) {
+            if (node == null) {
+                node = new Node(val);
+                return node;
+            }
+            if (val < node.data) {
+                node.left = insertVal(node.left, val);
+            } else {
+                node.right = insertVal(node.right, val);
+            }
+            return node;
+        }
+
+        Node remove(Node root, int value) {
+            if (root == null) {
+                return root;
+            }
+            if (value < root.data) {
+                root.left = remove(root.left, value);
+            } else if (value > root.data) {
+                root.right = remove(root.right, value);
+            } else {
+                if (root.left == null) {
+                    return root.right;
+                } else if (root.right == null) {
+                    return root.left;
+                }
+                root.data = minValue(root.right);
+                root.right = remove(root.right, root.data);
+            }
+            return root;
+        }
+
+        int minValue(Node node) {
+            int minValue = node.data;
+            while (node.left != null) {
+                minValue = node.left.data;
+                node = node.left;
+            }
+            return minValue;
+        }
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int x = sc.nextInt();
+        Tree tree = new Tree();
+
+        for (int i = 0; i < n; i++) {
+            tree.root = tree.remove(tree.root, x);
+
+            if (tree.root == null) {
+                System.out.println("NULL");
+            } else {
+                tree.display(tree.root);
+            }
+        }
+    }
+}
