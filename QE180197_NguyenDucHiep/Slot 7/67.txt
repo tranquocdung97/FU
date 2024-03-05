@@ -1,0 +1,111 @@
+import java.util.Scanner;
+
+class Node {
+    int data;
+    Node left;
+    Node right;
+
+    public Node(int data) {
+        this.data = data;
+        this.left = null;
+        this.right = null;
+    }
+}
+
+public class Ex67 {
+
+    public static Node insert(Node root, int x) {
+        if (root == null) {
+            Node temp = new Node(x);
+            return temp;
+        } else {
+            if (x < root.data) {
+                root.left = insert(root.left, x);
+            } else {
+                root.right = insert(root.right, x);
+            }
+        }
+        return root;
+    }
+
+    public static int treeHeight(Node root) {
+        if (root == null) {
+            return -1;
+        }
+        return 1 + Math.max(treeHeight(root.left), treeHeight(root.right));
+    }
+
+    public static Node turnRight(Node a) {
+        Node b = a.left;
+        Node d = b.right;
+        a.left = d;
+        b.right = a;
+        return b;
+    }
+
+    public static Node turnLeft(Node a) {
+        Node b = a.right;
+        Node c = b.left;
+        a.right = c;
+        b.left = a;
+        return b;
+    }
+
+    public static Node updateTreeAVL(Node t) {
+        if (Math.abs(treeHeight(t.left) - treeHeight(t.right)) > 1) {
+            if (treeHeight(t.left) > treeHeight(t.right)) {
+                Node p = t.left;
+                if (treeHeight(p.left) >= treeHeight(p.right)) {
+                    t = turnRight(t);
+                } else {
+                    t.left = turnLeft(t.left);
+                    t = turnRight(t);
+                }
+            } else {
+                Node p = t.right;
+                if (treeHeight(p.right) >= treeHeight(p.left)) {
+                    t = turnLeft(t);
+                } else {
+                    t.right = turnRight(t.right);
+                    t = turnLeft(t);
+                }
+            }
+        }
+        if (t.left != null) t.left = updateTreeAVL(t.left);
+        if (t.right != null) t.right = updateTreeAVL(t.right);
+        return t;
+    }
+
+    public static int countOccurrences(Node root, int x) {
+        if (root == null) {
+            return 0;
+        }
+
+        int count = 0;
+        if (root.data == x) {
+            count++;
+        }
+
+        count += countOccurrences(root.left, x);
+        count += countOccurrences(root.right, x);
+
+        return count;
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        Node root = null;
+
+        for (int i = 0; i < n; i++) {
+            int temp = sc.nextInt();
+            root = insert(root, temp);
+        }
+
+        root = updateTreeAVL(root);
+
+        int x = sc.nextInt();
+        int occurrences = countOccurrences(root, x);
+        System.out.println(occurrences);
+    }
+}
