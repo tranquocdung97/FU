@@ -1,0 +1,49 @@
+import java.util.*;
+
+public class ctdtVaGt {
+    //static Set<String> listString = new TreeSet<String>();
+    public static Integer convert(Integer n, Integer k) {
+        if(k==0) {return 1;}
+
+        Integer res=0, num1=0, num2=0;
+        List<List<Integer>> a = new ArrayList<>(); 
+        a.add(new ArrayList<>(Arrays.asList(n)));
+        
+        Integer i=0, check=0;
+        if((((n-1)/3)%2!=0) && ((n-1)%3==0)) {
+            num1=(n-1)/3;
+            check=1;
+        }
+        num2=n*2;
+        a.add(new ArrayList<>());
+        i++;
+        if(check==1) {a.get(i).add(num1); check=0;}
+        a.get(i).add(num2);
+
+        while(true) {
+            if(i==k) {
+                res=a.get(i).size();
+                return res;
+            }
+
+            a.add(new ArrayList<>()); 
+            for(int j=0; j<a.get(i).size(); j++) {
+                if(((a.get(i).get(j)-1)/3)%2!=0 && ((a.get(i).get(j)-1)%3==0)) {
+                    num1=(a.get(i).get(j)-1)/3;
+                    check=1;
+                }
+                num2=a.get(i).get(j)*2;
+        
+                if(check==1) {a.get(i+1).add(num1); check=0;}
+                a.get(i+1).add(num2);
+            }
+            i++;
+        }
+    }
+    public static void main(String[] args) {
+        Scanner cin = new Scanner(System.in);
+        Integer n = cin.nextInt(), k = cin.nextInt();
+        System.out.println(convert(n, k));
+        cin.close();
+    }
+}
