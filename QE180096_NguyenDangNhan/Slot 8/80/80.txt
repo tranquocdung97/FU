@@ -1,0 +1,17 @@
+Stack<Integer> stack = new Stack<Integer>();
+    Map<Integer, String> canNotMoveMore = new HashMap<Integer, String>();
+//DFS
+boolean check(int n, int[][] e, int u, int v) {
+        stack.push(u);
+        while(!stack.isEmpty() && stack.peek() != v) {
+            int top = stack.peek();
+            for(int i = 0 ; i < e.length ; i++) {
+                if(top == e[i][0] && !canNotMoveMore.containsKey(e[i][1])) {
+                    stack.push(e[i][1]);
+                    break;
+                }
+            }
+            if(top == stack.peek()) canNotMoveMore.put(stack.pop(), null);
+        }
+        return !stack.isEmpty() && stack.peek() == v;
+    }

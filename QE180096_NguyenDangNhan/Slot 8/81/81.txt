@@ -1,0 +1,30 @@
+int graphFunction(int n, int[][] e, int u, int v){
+        int s = 0;
+        boolean t = false;
+        boolean[] b = new boolean[n+1];
+        boolean[][] a = new boolean[1000][1000];
+        ArrayDeque<Integer> ad = new ArrayDeque<>();
+        Arrays.fill(b,true);
+        for(int i = 0;i<e.length;i++){
+            a[e[i][0]][e[i][1]] = true;
+            a[e[i][1]][e[i][0]] = true;
+        }
+        b[u]=false;
+        do{
+            for(int i = 1;i<=n;i++)
+                if(b[i]&&a[u][i]){
+                    t = true;
+                    if(i==v)
+                        return s+1;
+                    else{
+                        ad.add(i);
+                        b[i] = false;
+                    }
+                }
+            if(t)
+                s++;
+            u = ad.pollFirst();
+            t = false;
+        } while(!ad.isEmpty());
+        return -1;
+    }
