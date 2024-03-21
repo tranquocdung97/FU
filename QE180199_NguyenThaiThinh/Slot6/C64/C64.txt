@@ -1,0 +1,49 @@
+import java.util.Scanner;
+
+public class Slot6{
+    static class BinaryTree{
+        private class Node{
+            int val;
+            Node left,right;
+          private Node(int val){
+            this.val=val;
+            this.left=null;
+            this.right=null;
+          }
+        }
+        Node root;
+        public BinaryTree(){
+            this.root=null;
+        }
+    public void add(int val) {
+      this.root = addRecursive(root, val);
+    }
+
+    private Node addRecursive(Node current, int val) {
+      if (current == null)
+        return new Node(val);
+      if (val < current.val)
+        current.right = addRecursive(current.right, val);
+      else
+        current.left = addRecursive(current.left, val);
+
+      return current;
+    }
+    public int lvtree(Node current){
+        int count = 0;
+        if (current==null) return count;
+        else count++;
+        return count= count + Math.max(lvtree(current.right), lvtree(current.left));
+    }
+    }
+    public static void main(String []args){
+        Scanner sc= new Scanner (System.in);
+        int n= sc.nextInt();
+        BinaryTree tree = new BinaryTree();
+        for (int i=0;i<n;i++){
+            tree.add(sc.nextInt());
+        }
+        System.out.print(tree.lvtree(tree.root)-1);
+    }
+
+}

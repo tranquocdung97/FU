@@ -1,0 +1,150 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+
+import java.util.Scanner;
+
+/**
+ *
+ * @author ASUS
+ */
+public class bai67codelearn {
+
+    public static Node insert(Node parent, int val) {
+        if (parent == null) {
+            Node temp = new Node();
+            temp.key = val;
+            return temp;
+        } else {
+            if (val < parent.key) {
+                parent.left = insert(parent.left, val);
+
+            } else {
+                parent.right = insert(parent.right, val);
+
+            }
+            return parent;
+        }
+    }
+
+    public static int[] input(Scanner sc) {
+        int n = sc.nextInt();
+        int a[] = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = sc.nextInt();
+        }
+        return a;
+    }
+
+    public static int degree(Node root) {
+        if (root == null) {
+            return -1;
+        }
+        if (root.left == null && root.right == null) {
+            return 0;
+        }
+        return 1 + Math.max(degree(root.left), degree(root.right));
+    }
+
+    public static boolean checkAVL(Node root) {
+        if (root == null) {
+            return true;
+        }
+        if (Math.abs(degree(root.left) - degree(root.right)) > 1) {
+            return false;
+        }
+        return checkAVL(root.left) && checkAVL(root.right);
+    }
+
+    public static Node turnRight(Node a) {
+        Node b = a.left;
+        Node d = b.right;
+        a.left = d;
+        b.right = a;
+        return b;
+    }
+
+    public static Node turnLeft(Node a) {
+        Node b = a.right;
+        Node d = b.left;
+        a.right = d;
+        b.left = a;
+        return b;
+    }
+
+    public static Node AdjustBalance(Node root) {
+        if (root == null) {
+            return null;
+        }
+        if ((degree(root.left) - degree(root.right)) > 1) {
+            Node p = root.left;
+            if (degree(p.left) < degree(p.right)) {
+                root.left = turnLeft(root.left);
+            }
+            root = turnRight(root);
+        } else if ((degree(root.right) - degree(root.left)) > 1) {
+            Node p = root.right;
+            if (degree(p.left) > degree(p.right)) {
+                root.right = turnRight(root.right);
+            }
+            root = turnLeft(root);
+        }
+        if (root.left != null) {
+            root.left = AdjustBalance(root.left);
+        }
+        if (root.right != null) {
+            root.right = AdjustBalance(root.right);
+        }
+        return root;
+    }
+
+    public static void checkValue(Node p, Scanner sc) {
+        int x = sc.nextInt();
+        System.out.println(countValue(p, x));
+    }
+
+    public static int countValue(Node p, int x) {
+        if (p == null) {
+            return 0;
+        }
+        if (p.key == x) {
+            return 1 + countValue(p.left, x) + countValue(p.right, x);
+        } else {
+            return countValue(p.left, x) + countValue(p.right, x);
+        }
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int[] a = input(sc);
+        BinaryTree t = new BinaryTree();
+        for (int i = 0; i < a.length; i++) {
+            t.root = insert(t.root, a[i]);
+        }
+        while (!checkAVL(t.root)) {
+            t.root = AdjustBalance(t.root);
+        }
+
+        checkValue(t.root, sc);
+    }
+
+}
+
+class Node {
+
+    int key;
+    Node left;
+    Node right;
+}
+
+class BinaryTree {
+
+    Node root;
+
+    BinaryTree() {
+        root = null;
+    }
+}

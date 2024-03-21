@@ -1,0 +1,14 @@
+import java.util.*;
+
+public class ctdtVaGt {
+    public static long factorial(Integer a, Integer b) {
+        if(b==0) return 1; 
+        return a * factorial(a, b-1);
+    }
+    public static void main(String[] args) {
+        Scanner cin = new Scanner(System.in);
+        Integer a = cin.nextInt(), b = cin.nextInt();
+        System.out.println(factorial(a, b));
+        cin.close();
+    }
+}

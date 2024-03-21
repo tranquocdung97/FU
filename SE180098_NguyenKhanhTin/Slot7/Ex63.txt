@@ -1,0 +1,85 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package Slot7;
+
+import java.util.Scanner;
+
+/**
+ *
+ * @author khanh
+ */
+public class Ex63 {
+
+    static class Node {
+
+        int data;
+        Node left;
+        Node right;
+
+        public Node(int val) {
+            this.data = val;
+            this.left = null;
+            this.right = null;
+        }
+    }
+
+    static class Tree {
+
+        private Node root;
+
+        void display(Node node) {
+            if (node == null) {
+                return;
+            }
+            display(node.left);
+            System.out.print(node.data + " ");
+            display(node.right);
+        }
+
+        void insert(int val) {
+            root = insertVal(root, val);
+        }
+
+        Node insertVal(Node node, int val) {
+            if (node == null) {
+                node = new Node(val);
+                return node;
+            }
+            if (val < node.data) {
+                node.left = insertVal(node.left, val);
+            } else {
+                node.right = insertVal(node.right, val);
+            }
+            return node;
+        }
+
+        int countLeafNodes() {
+            return countLeaf(root);
+        }
+
+        int countLeaf(Node node) {
+            if (node == null) {
+                return 0;
+            }
+            if (node.left == null && node.right == null) {
+                return 1;
+            }
+            return countLeaf(node.left) + countLeaf(node.right);
+
+        }
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        Tree tree = new Tree();
+
+        for (int i = 0; i < n; i++) {
+            tree.insert(sc.nextInt());
+        }
+        int leafCount = tree.countLeafNodes();
+        System.out.println(leafCount);
+    }
+}

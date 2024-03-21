@@ -1,0 +1,15 @@
+import java.util.*;
+
+public class ctdtVaGt {
+    public static long factorial(Integer n) {
+        if(n==0) return 1; //dieu kien stop
+        return n * factorial(n-1);
+    }
+
+    public static void main(String[] args) {
+        Scanner cin = new Scanner(System.in);
+        Integer n = cin.nextInt();
+        System.out.println(factorial(n));
+        cin.close();
+    }
+}

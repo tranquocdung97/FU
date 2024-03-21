@@ -1,0 +1,97 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+
+import java.util.Scanner;
+
+public class Slot6 {
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        Node root = null;
+        for (int i = 0; i < n; i++) {
+            root = addNode(root, sc.nextInt());
+        }
+        System.out.println(checkAVL(root));
+    }
+
+    public static int treeLevel(Node root) {
+        if (root == null) {
+            return -1;
+        }
+        if (treeLevel(root.getLeft()) > treeLevel(root.getRight())) {
+            return 1 + treeLevel(root.getLeft());
+        } else {
+            return 1 + treeLevel(root.getRight());
+        }
+    }
+
+    public static boolean checkAVL(Node root) {
+        if (root == null) {
+            return true;
+        }
+        int t = treeLevel(root.getLeft()) - treeLevel(root.getRight());
+        if (t > 1 || t < -1) {
+            return false;
+        }
+        return checkAVL(root.getLeft()) && checkAVL(root.getRight());
+    }
+
+    public static Node addNode(Node root, int x) {
+        if (root == null) {
+            root = new Node(x);
+            return root;
+        } else {
+            if (x < root.getKey()) {
+                root.setLeft(addNode(root.getLeft(), x));
+            } else {
+                root.setRight(addNode(root.getRight(), x));
+            }
+        }
+        return root;
+    }
+
+    public static class Node {
+
+        int key;
+        Node left;
+        Node right;
+
+        public Node(int key) {
+            this.key = key;
+            this.left = null;
+            this.right = null;
+        }
+
+        public Node() {
+        }
+
+        public int getKey() {
+            return key;
+        }
+
+        public void setKey(int key) {
+            this.key = key;
+        }
+
+        public Node getLeft() {
+            return left;
+        }
+
+        public void setLeft(Node left) {
+            this.left = left;
+        }
+
+        public Node getRight() {
+            return right;
+        }
+
+        public void setRight(Node right) {
+            this.right = right;
+        }
+    }
+}
