@@ -1,0 +1,50 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+
+public class GraphLongestPath {
+    
+    static int longestPath(ArrayList<ArrayList<Integer>> graph, int u, int v, boolean[] visited, int length) {
+        visited[u] = true;
+        if (u == v) {
+            return length;
+        }
+        int maxLength = -1;
+        for (int neighbor : graph.get(u)) {
+            if (!visited[neighbor]) {
+                maxLength = Math.max(maxLength, longestPath(graph, neighbor, v, visited, length + 1));
+            }
+        }
+        visited[u] = false;   
+        return maxLength;
+    }
+    
+    static int graphFunction(int n, int[][] e, int u, int v) {
+        ArrayList<ArrayList<Integer>> graph = new ArrayList<>();
+        for (int i = 0; i <= n; i++) {
+            graph.add(new ArrayList<>());
+        }
+        for (int[] edge : e) {
+            graph.get(edge[0]).add(edge[1]);
+            graph.get(edge[1]).add(edge[0]);
+        }
+        boolean[] visited = new boolean[n + 1];
+        
+        int longest = longestPath(graph, u, v, visited, 0);
+        
+        return longest != -1 ? longest : -1;
+    }
+    
+    public static void main(String[] args) {
+        int n = 6;
+        int[][] e = {{1,3}, {1,2}, {2, 3}, {3,4}, {2,5}, {4,6}, {6,5}, {4,5}};
+        int u = 1;
+        int v = 5;
+        System.out.println(graphFunction(n, e, u, v)); 
+        
+        n = 2;
+        e = new int[][]{{1,2}, {3,4}};
+        u = 2;
+        v = 3;
+        System.out.println(graphFunction(n, e, u, v));  
+    }
+}

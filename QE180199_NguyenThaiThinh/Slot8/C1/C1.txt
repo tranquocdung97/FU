@@ -1,0 +1,44 @@
+import java.util.LinkedList;
+import java.util.Queue;
+
+public class ShortestPathBetweenCities {
+    
+    // BFS to find shortest path
+    static int shortestPath(int n, int[][] e, int u, int v) {
+        Queue<Integer> queue = new LinkedList<Integer>();
+        boolean[] visited = new boolean[n + 1];
+        int[] distance = new int[n + 1];
+        
+        queue.add(u);
+        visited[u] = true;
+        distance[u] = 0;
+        
+        while (!queue.isEmpty()) {
+            int currentCity = queue.poll();
+            
+            for (int i = 0; i < e.length; i++) {
+                if (currentCity == e[i][0] && !visited[e[i][1]]) {
+                    int nextCity = e[i][1];
+                    visited[nextCity] = true;
+                    distance[nextCity] = distance[currentCity] + 1;
+                    queue.offer(nextCity);
+                }
+            }
+        }
+        
+        return visited[v] ? distance[v] : -1;
+    }
+
+    public static void main(String[] args) {
+        int[][] edges1 = { { 1, 2 }, { 2, 3 }, { 3, 4 }, { 4, 5 } };
+        int[][] edges2 = { { 1, 2 }, { 3, 4 }, { 2, 4 } };
+        
+        int u1 = 1;
+        int v1 = 5;
+        int u2 = 1;
+        int v2 = 3;
+        
+        System.out.println(shortestPath(5, edges1, u1, v1)); // Output: 4
+        System.out.println(shortestPath(3, edges2, u2, v2)); // Output: -1
+    }
+}

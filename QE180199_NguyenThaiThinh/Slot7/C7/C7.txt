@@ -1,0 +1,55 @@
+import java.util.*;
+
+public class dsaa77 {
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        String s = sc.next();
+        sc.close();
+        System.out.println(longestPalindrome(s));
+    }
+    public static String longestPalindrome(String s){
+        String kq = "";
+        int n = s.length();
+        char[] b = new char[n];
+        for(int i = 0;i<n;i++) b[i] = s.charAt(i);
+        int[][] a = new int[n][n];
+        a[0][0] = 1;
+        for(int i = 1;i<n;i++){
+            a[i][i] = 1;
+            if(b[i]==b[i-1]) a[i-1][i] = 2;
+            else a[i-1][i] = 1;
+        }
+        for(int k = 2;k<n;k++){
+            for(int i = 0;i+k<n;i++){
+                if(b[i]==b[i+k]){
+                    a[i][i+k] = 2+a[i+1][i+k-1]; 
+                }
+                else{
+                    for(int j = 1;j<k;j++)
+                        a[i][i+k] = Math.max(a[i][i+k],Math.max(a[i][i+j],a[i+j][i+k]));
+                }
+            }
+        }
+        int max = a[0][n-1];
+        if(max==1){
+            kq+= b[0];
+            return kq;
+        }
+        char t[] = new char[max];
+        int[] l = new int[2];
+        l[0] = 0;
+        l[1] = n-1;
+        int k = 0;
+        while(2*k<=a[0][n-1]-1){
+            while(a[l[0]][l[1]]==max) l[1]--;
+            while(a[l[0]][l[1]+1]==max) l[0]++;
+            t[k] = b[l[0]-1];
+            t[a[0][n-1]-k-1] = b[l[1]+1];
+            max = max - 2;
+            k++;
+        }
+        for(char i:t)
+            kq = kq+i;
+        return kq;
+    }
+}
