@@ -1,0 +1,54 @@
+package Slot8;
+
+import java.util.Scanner;
+
+public class Ex72 {
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < a.length; i++) {
+            a[i] = sc.nextInt();
+        }
+        System.out.println(xepGach(n, a));
+    }
+
+    public static int xepGach(int n, int[] doCungGach) {
+
+        int temp;
+        for (int i = 0; i < doCungGach.length; i++) {
+            for (int j = i + 1; j < doCungGach.length; j++) {
+                if (doCungGach[j] > doCungGach[i]) {
+                    temp = doCungGach[i];
+                    doCungGach[i] = doCungGach[j];
+                    doCungGach[j] = temp;
+                }
+            }
+        }
+
+        int[] tempResult = new int[doCungGach[0] + 1];
+        tempResult[0] = doCungGach[0];
+
+        for (int i = 0; i < tempResult.length - 1; i++) {
+            for (int j = i + 1; j < doCungGach.length; j++) {
+                if (tempResult[i] >= doCungGach[j]) {
+                    tempResult[i + 1] = doCungGach[j];
+                    break;
+                }
+            }
+
+        }
+
+        int count = 0;
+        for (int i = 0; i < tempResult.length; i++) {
+
+            if (tempResult[i] != 0) {
+                count++;
+            }
+        }
+
+        int result = count;
+        return result;
+    }
+}
