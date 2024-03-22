@@ -31,7 +31,7 @@ public class 36 {
             a[i] = sc.nextInt();
         }
 
-        int x = scanner.nextInt();
+        int x = sc.nextInt();
         System.out.println(binarySearch(a, n, x));
     }
 }
