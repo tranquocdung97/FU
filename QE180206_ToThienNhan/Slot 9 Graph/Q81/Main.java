@@ -1,0 +1,54 @@
+package test;
+
+import java.util.LinkedList;
+import java.util.Queue;
+
+public class Main {
+    static boolean[] b = new boolean[100001];
+    static int[] c = new int[100001];
+    static boolean[][] a = new boolean[1001][1001];
+
+    static int bfs(int u, int v, int n) {
+        Queue<Integer> q = new LinkedList<>();
+        q.add(u);
+        b[u] = false;
+        while (!q.isEmpty()) {
+            int k = q.peek();
+            for (int i = 1; i <= n; i++) {
+                if (a[k][i] && b[i]) {
+                    System.out.println(a[k][i]);
+                    c[i] = c[k] + 1;
+                    b[i] = false;
+                    q.add(i);
+                    if (i == v)
+                        break;
+                }
+            }
+            q.poll();
+        }
+        return c[v];
+    }
+
+    static int graphFunction(int n, int[][] e, int u, int v) {
+        for (int i = 0; i <= n; i++) {
+            b[i] = true;
+            c[i] = 0;
+        }
+
+        for (int[] x : e) {
+            a[x [0]] [x [1]] = true;
+            a[x[1]][x[0]] = true;
+        }
+        int k = bfs(u, v, n);
+        return (k == 0) ? -1 : k;
+    }
+
+    public static void main(String[] args) {
+        int n = 5;
+        int[][] edges = { { 1, 2 }, { 2, 3 }, { 2, 4 }, { 3, 5 } };
+        int u = 1;
+        int v = 5;
+
+        System.out.println(graphFunction(n, edges, u, v));
+    }
+}
