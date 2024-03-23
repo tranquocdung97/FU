@@ -1,0 +1,45 @@
+import java.util.Scanner;
+
+public class Main {
+
+public static String themNumberZero(int n, String chuoi) {
+StringBuilder chuoiBuilder = new StringBuilder(chuoi);
+while (chuoiBuilder.length() < n) {
+chuoiBuilder.insert(0, "0");
+}
+chuoi = chuoiBuilder.toString();
+return chuoi;
+}
+
+public static String phanTichNhiPhan(Long so) {
+if (so == 0) return "0";
+if (so == 1) return "1";
+return phanTichNhiPhan(so/2)+so%2;
+}
+
+public static Long luyThua(int a, int b) {
+
+if (b == 0) {
+return 1L;
+}
+
+if (a == 0) {
+return 0L;
+}
+
+return a*luyThua(a, b-1);
+}
+
+public static void main(String[] args) {
+Scanner scanner = new Scanner(System.in);
+int a = scanner.nextInt();
+StringBuilder kq = new StringBuilder();
+Long run = luyThua(2, a);
+for (Long i = 0L; i < run; i++) {
+String nhiPhan = phanTichNhiPhan(i);
+kq.append(themNumberZero(a,nhiPhan)).append(" ");
+}
+System.out.println(kq);
+
+}
+}
