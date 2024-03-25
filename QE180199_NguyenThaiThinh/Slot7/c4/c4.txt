@@ -1,0 +1,37 @@
+import java.util.Scanner;
+
+public class Main{
+public static void main(String[] args){
+Scanner sc = new Scanner(System.in);
+int n = sc.nextInt();
+int[] a = new int[n];
+for(int i = 0; i < n; i++){
+a[i] = sc.nextInt();
+}
+//tao 1 mang luu chieu dai cho moi vi tri cua moi so voi do dai neu so hien tai
+// lon hon so truoc thi chieu dai cua so o vi tri do dc cong 1;
+int[] lengthArr = new int[n];
+lengthArr[0] = 1;
+for (int i =1; i<n; i++){
+if(a[i]>=a[i-1]){
+lengthArr[i] = lengthArr[i-1] + 1;
+}else{
+lengthArr[i] = 1;
+}
+}
+
+//tim vi tri co do dai lon nhat
+int indexLengthMax = 0;
+for(int i = 0; i < n; i++){
+if(lengthArr[indexLengthMax] < lengthArr[i]){
+indexLengthMax = i;
+}
+}
+
+for(int i = indexLengthMax - lengthArr[indexLengthMax] + 1; i <= indexLengthMax; i++){
+System.out.print(a[i] + " ");
+}
+
+
+}
+}

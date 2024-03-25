@@ -1,0 +1,63 @@
+package Slot9;
+
+import java.util.*;
+
+public class Ex81 {
+    static boolean[] b = new boolean[100001];
+    static int[] c = new int[100001];
+    static boolean[][] a = new boolean[1001][1001];
+    static boolean kt = false;
+
+    public static int bfs(int u, int v, int n) {
+        int kq = n + 1;
+        Queue<Integer> q = new LinkedList<>();
+        q.add(u);
+        b[u] = false;
+        while (!q.isEmpty()) {
+            int k = q.poll();
+            for (int i = 1; i <= n; i++) {
+                if (a[k][i] && b[i]) {
+                    c[i] = c[k] + 1;
+                    b[i] = false;
+                    q.add(i);
+                    if (i == v)
+                        break;
+                }
+            }
+        }
+        return c[v];
+    }
+
+    public static int graphFunction(int n, List<List<Integer>> e, int u, int v) {
+        for (int i = 0; i <= n; i++) {
+            b[i] = true;
+            c[i] = 0;
+        }
+        for (int i = 1; i <= n; i++) {
+            Arrays.fill(a[i], false);
+        }
+        for (List<Integer> edge : e) {
+            int x = edge.get(0);
+            int y = edge.get(1);
+            a[x][y] = true;
+            a[y][x] = true;
+        }
+        int k = bfs(u, v, n);
+        return (k == 0) ? -1 : k;
+    }
+
+    public static void main(String[] args) {
+        // Example usage:
+        int n = 5;
+        List<List<Integer>> edges = new ArrayList<>();
+        edges.add(Arrays.asList(1, 2));
+        edges.add(Arrays.asList(2, 3));
+        edges.add(Arrays.asList(3, 4));
+        edges.add(Arrays.asList(4, 5));
+        edges.add(Arrays.asList(5, 1));
+        int u = 1;
+        int v = 4;
+        int shortestPathLength = graphFunction(n, edges, u, v);
+        System.out.println("Shortest path length from " + u + " to " + v + ": " + shortestPathLength);
+    }
+}

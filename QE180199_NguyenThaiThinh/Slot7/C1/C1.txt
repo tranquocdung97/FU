@@ -1,0 +1,36 @@
+import java.util.*;
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+public class ctdtVaGt {
+public static void main(String[] args) {
+Scanner cin = new Scanner(System.in);
+Integer n = cin.nextInt(), tmp, min=Integer.MAX_VALUE;
+int[] soNgayChoTungCay = new int[n];
+for(int i=0;i<soNgayChoTungCay.length;i++){
+soNgayChoTungCay[i]=cin.nextInt();
+}
+
+System.out.println(afferDays(n,soNgayChoTungCay));
+}
+
+public static int afferDays(int n,int[] soNgayChoTungCay){
+
+
+List<Integer> listSoNgayChoTungCay = new ArrayList<>();
+for (Integer in : soNgayChoTungCay){
+listSoNgayChoTungCay.add(in);
+}
+
+listSoNgayChoTungCay=listSoNgayChoTungCay.stream().sorted(((o1, o2) -> o2-o1)).collect(Collectors.toList());
+int result;
+if(listSoNgayChoTungCay.stream().max(Integer::compareTo).get()+1>listSoNgayChoTungCay.size()){
+result = listSoNgayChoTungCay.stream().max(Integer::compareTo).get()+1;
+}else {
+result = listSoNgayChoTungCay.size()+1;
+}
+
+return result;
+}
+}

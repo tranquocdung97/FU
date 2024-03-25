@@ -1,0 +1,61 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Collections;
+import java.util.Scanner;
+
+public class Exercise14 {
+public static int min_numberOfNote(int[] a, int x) {
+        
+        List<Integer> list = new ArrayList<>();     
+        int n = a.length-1;
+    
+        for(int i = n; i>=0; i--) {
+            if(x%a[i] == 0) {
+                list.add(x/a[i]);
+            }else {
+                
+                int count = x/a[i];
+                int sum = count*a[i];
+                int surplus = x%a[i];       
+                
+                for(int j = n-1; j>=0; j--) {
+                    if(surplus/a[j] >=2) {
+                        sum = sum + ((surplus/a[j])* a[j]);
+                        count = count + (surplus/a[j]);
+                    }else if(sum+a[j] <= x){
+                        sum+=a[j];
+                        count++;
+                    }
+                    if(sum==x) {
+                        list.add(count);
+                    }               
+                }
+            }
+        }
+        
+        if(list.isEmpty()) {
+            return 0;
+        }
+        list.forEach(System.out::println);
+        
+        int min = list.get(0);
+        for(int k: list) {
+            if(min>k) min = k;
+        }
+        
+        return min;
+    }
+    
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);   
+        int n = scanner.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < a.length; i++) {
+            a[i] = scanner.nextInt();
+        }
+        int x = scanner.nextInt();
+        System.out.println(min_numberOfNote(a, x));
+    }
+
+}

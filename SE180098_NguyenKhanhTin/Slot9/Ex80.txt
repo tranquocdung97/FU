@@ -1,0 +1,51 @@
+package Slot9;
+
+import java.util.*;
+
+public class Ex80 {
+    static boolean[] b = new boolean[100001];
+    static boolean[][] a = new boolean[1001][1001];
+    static boolean kt = false;
+
+    public static void dfs(int u, int v, int n) {
+        b[u] = false;
+        for (int i = 1; i <= n; i++) {
+            if (a[u][i] && b[i]) {
+                if (i == v) {
+                    kt = true;
+                }
+                dfs(i, v, n);
+                b[i] = true;
+            }
+        }
+    }
+
+    public static boolean check(int n, List<List<Integer>> e, int u, int v) {
+        Arrays.fill(b, true);
+        for (int i = 1; i <= n; i++) {
+            Arrays.fill(a[i], false);
+        }
+        for (List<Integer> edge : e) {
+            int x = edge.get(0);
+            int y = edge.get(1);
+            a[x][y] = true;
+        }
+        dfs(u, v, n);
+        return kt;
+    }
+
+    public static void main(String[] args) {
+        // Example usage:
+        int n = 5;
+        List<List<Integer>> edges = new ArrayList<>();
+        edges.add(Arrays.asList(1, 2));
+        edges.add(Arrays.asList(2, 3));
+        edges.add(Arrays.asList(3, 4));
+        edges.add(Arrays.asList(4, 5));
+        edges.add(Arrays.asList(5, 1));
+        int u = 1;
+        int v = 4;
+        boolean isConnected = check(n, edges, u, v);
+        System.out.println("Is there a path from " + u + " to " + v + "? " + isConnected);
+    }
+}

@@ -1,0 +1,52 @@
+import java.util.*;
+
+public class dsaa78 {
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] a = new int[n];
+        for(int i = 0;i<n;i++) a[i] = sc.nextInt();
+        sc.close();
+        longestAscending(a,n);
+    }
+    public static void longestAscending(int[] a, int n ){
+        int[] l = new int[n];
+        for(int i  =0;i<n;i++) l[i] = 1;
+        for(int i = 1;i<n;i++)
+            if(a[i]>=a[i-1]){
+                for(int k = 0;k<i;k++)
+                    if(a[k]<=a[i])
+                        l[i] = Math.max(l[i],l[k]);
+                l[i]++;
+            }
+            else
+                for(int j = i-1;j>=0;j--)
+                    if(a[i]>=a[j]){
+                        l[i] = l[j]+1;
+                        break;
+                    }
+        int max = n-1;
+        for(int i = n-1;i>=0;i--)
+            if(l[i]>l[max]) max = i;
+        int[] t = new int[l[max]];
+        int maxtemp = l[max]-1;
+        int k = n-1;
+        while(k>=l[max] - 1){
+            if(l[k]==l[max]) {
+                t[l[max]-1] = a[k];
+                max = k;
+            }
+            k--;
+        }
+        for(int i = maxtemp-1;i>=0;i--){
+            for(int j = max-1;j>=maxtemp-1;j--)
+                if(l[j]==maxtemp&&a[j]>=t[i]&&a[j]<=t[i+1]) {
+                    t[i] =a[j];
+                    max = j;
+                }
+            maxtemp--;
+        }
+        for(int i:t)
+            System.out.print(i+" ");
+    }
+}

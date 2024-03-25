@@ -1,0 +1,33 @@
+package Slot8;
+
+import java.util.*;
+
+public class Ex71 {
+    public static void main(String[] args) {
+        Scanner cin = new Scanner(System.in);
+        int n = cin.nextInt();
+        int[] soNgayChoTungCay = new int[n];
+        for (int i = 0; i < n; i++) {
+            soNgayChoTungCay[i] = cin.nextInt();
+        }
+
+        System.out.println(afferDays(n, soNgayChoTungCay));
+    }
+
+    public static int afferDays(int n, int[] soNgayChoTungCay) {
+        List<Integer> listSoNgayChoTungCay = new ArrayList<>();
+        for (int in : soNgayChoTungCay) {
+            listSoNgayChoTungCay.add(in);
+        }
+
+        listSoNgayChoTungCay.sort(Comparator.reverseOrder());
+        int result;
+        if (listSoNgayChoTungCay.get(0) + 1 > listSoNgayChoTungCay.size()) {
+            result = listSoNgayChoTungCay.get(0) + 1;
+        } else {
+            result = listSoNgayChoTungCay.size() + 1;
+        }
+
+        return result;
+    }
+}
